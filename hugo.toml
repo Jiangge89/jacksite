@@ -1,0 +1,77 @@
+baseURL = 'https://jiangge89.github.io/jacksite/'
+title = "Jack's Site"
+theme = 'hextra'
+
+enableRobotsTXT = true
+hasCJKLanguage = true
+disablePathToLower = true
+
+[markup]
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.highlight]
+    noClasses = false
+
+enableInlineShortcodes = true
+
+[menu]
+  [[menu.main]]
+    name = '投资'
+    pageRef = '/docs/invest'
+    weight = 1
+  [[menu.main]]
+    name = '技术'
+    pageRef = '/docs/tech'
+    weight = 2
+  [[menu.main]]
+    name = '跑步'
+    pageRef = '/docs/running'
+    weight = 3
+  [[menu.main]]
+    name = '读书'
+    pageRef = '/docs/reading'
+    weight = 4
+  [[menu.main]]
+    name = '健康'
+    pageRef = '/docs/health'
+    weight = 5
+  [[menu.main]]
+    name = 'Search'
+    weight = 5
+    [menu.main.params]
+      type = 'search'
+
+[params]
+  description = '个人成长记录'
+
+  [params.theme]
+    default = 'system'
+    displayToggle = true
+
+  [params.navbar]
+    displayTitle = true
+    displayLogo = false
+
+  [params.footer]
+    enable = true
+    displayCopyright = false
+    displayPoweredBy = false
+
+  [params.search]
+    enable = true
+    type = 'flexsearch'
+    [params.search.flexsearch]
+      index = 'content'
+      tokenize = 'forward'
+
+  [params.editURL]
+    enable = false
+
+  [params.toc]
+    displayTags = false
+
+  [params.page]
+    width = 'wide'
