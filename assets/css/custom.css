@@ -1,3 +1,9 @@
+/* ── Sidebar: always show collapse arrows for items with children ── */
+
+.hextra-sidebar-collapsible-button {
+  display: inline-flex !important;
+}
+
 /* ── Digital Garden: Home Hero ── */
 
 .garden-hero {
