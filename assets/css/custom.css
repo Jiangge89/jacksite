@@ -1,0 +1,252 @@
+/* ── Digital Garden: Home Hero ── */
+
+.garden-hero {
+  max-width: 740px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 3rem;
+  text-align: center;
+}
+
+.garden-hero .hero-title {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin: 0 0 0.5rem;
+  color: #111;
+}
+
+:root[class~="dark"] .garden-hero .hero-title {
+  color: #f0f0f0;
+}
+
+.garden-hero .hero-role {
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: #666;
+  margin: 0 0 1rem;
+  letter-spacing: 0.02em;
+}
+
+:root[class~="dark"] .garden-hero .hero-role {
+  color: #999;
+}
+
+.garden-hero .hero-tagline {
+  font-size: 1.125rem;
+  font-weight: 400;
+  color: #444;
+  margin: 0 0 2.5rem;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+:root[class~="dark"] .garden-hero .hero-tagline {
+  color: #aaa;
+}
+
+.garden-hero .hero-divider {
+  width: 48px;
+  height: 2px;
+  background: #d0d0d0;
+  margin: 0 auto 2.5rem;
+  border: none;
+}
+
+:root[class~="dark"] .garden-hero .hero-divider {
+  background: #444;
+}
+
+.garden-hero .hero-intro {
+  font-size: 1rem;
+  line-height: 1.85;
+  color: #444;
+  text-align: left;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+:root[class~="dark"] .garden-hero .hero-intro {
+  color: #bbb;
+}
+
+/* ── Home: Section Grid ── */
+
+.garden-sections {
+  max-width: 740px;
+  margin: 1rem auto 0;
+  padding: 0 1.5rem 4rem;
+}
+
+.garden-sections h2 {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #999;
+  margin: 0 0 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+:root[class~="dark"] .garden-sections h2 {
+  color: #666;
+  border-bottom-color: #333;
+}
+
+.garden-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+@media (min-width: 640px) {
+  .garden-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.garden-grid a {
+  display: block;
+  padding: 1rem 0;
+  text-decoration: none;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.15s;
+}
+
+:root[class~="dark"] .garden-grid a {
+  border-bottom-color: #222;
+}
+
+@media (min-width: 640px) {
+  .garden-grid a {
+    padding: 1rem;
+    border-bottom: none;
+    border-radius: 8px;
+  }
+
+  .garden-grid a:hover {
+    background: #f8f8f8;
+  }
+
+  :root[class~="dark"] .garden-grid a:hover {
+    background: #1a1a1a;
+  }
+}
+
+.garden-grid .section-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #222;
+  margin: 0 0 0.25rem;
+}
+
+:root[class~="dark"] .garden-grid .section-title {
+  color: #e0e0e0;
+}
+
+.garden-grid .section-desc {
+  font-size: 0.875rem;
+  color: #888;
+  margin: 0;
+}
+
+:root[class~="dark"] .garden-grid .section-desc {
+  color: #666;
+}
+
+/* ── About Page ── */
+
+.about-page {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2rem 0 4rem;
+}
+
+.about-page h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.5rem;
+}
+
+.about-page .about-subtitle {
+  font-size: 1rem;
+  color: #666;
+  margin: 0 0 2.5rem;
+  line-height: 1.7;
+}
+
+:root[class~="dark"] .about-page .about-subtitle {
+  color: #999;
+}
+
+.about-page h2 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+:root[class~="dark"] .about-page h2 {
+  border-bottom-color: #2a2a2a;
+}
+
+.about-page p {
+  font-size: 1rem;
+  line-height: 1.85;
+  color: #444;
+  margin: 0 0 1.25rem;
+}
+
+:root[class~="dark"] .about-page p {
+  color: #bbb;
+}
+
+.about-page ul {
+  margin: 0 0 1.25rem;
+  padding-left: 1.25rem;
+}
+
+.about-page li {
+  font-size: 1rem;
+  line-height: 1.85;
+  color: #444;
+  margin-bottom: 0.35rem;
+}
+
+:root[class~="dark"] .about-page li {
+  color: #bbb;
+}
+
+.about-page li strong {
+  color: #222;
+  font-weight: 600;
+}
+
+:root[class~="dark"] .about-page li strong {
+  color: #ddd;
+}
+
+.about-page blockquote {
+  border-left: 3px solid #d0d0d0;
+  margin: 2rem 0;
+  padding: 0.75rem 1.25rem;
+  font-style: italic;
+  color: #555;
+}
+
+:root[class~="dark"] .about-page blockquote {
+  border-left-color: #444;
+  color: #999;
+}
+
+.about-page blockquote p {
+  color: inherit;
+  margin-bottom: 0.25rem;
+}
+
+.about-page blockquote p:last-child {
+  margin-bottom: 0;
+}

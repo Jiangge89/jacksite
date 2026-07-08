@@ -2,14 +2,42 @@
 title: "About 关于"
 ---
 
-Born in 1989. Programmer with 10+ years of experience building and maintaining large-scale distributed systems.
+<div class="about-page">
 
-1989 年生，程序员，10 年以上大规模分布式系统开发和维护经验。
+# About Me
 
-Outside of work: running, stock trading, reading, and self-reflection.
+I'm a software engineer who has spent over a decade building and maintaining large-scale distributed systems. I care about making things work reliably at scale — and understanding why they sometimes don't.
 
-工作之外的时间花在跑步、股票投机、读书和自我剖析上。
+<p class="about-subtitle">In recent years, I've become increasingly interested in how AI changes the way we build software, make decisions, and understand the world around us.</p>
 
-This site is a growth journal — tracking investment decisions, technical learnings, training data, books read, and honest self-observation. Not aiming for completeness, just authenticity.
+## What I'm Exploring
 
-这个站点用来记录成长轨迹——投资的决策过程、技术的学习沉淀、跑步的训练数据、读过的书、以及对自己的持续观察。不求完整，只求真实。
+- **Backend Engineering** — distributed systems, scalability, and the hard problems that only show up in production.
+- **AI Applications** — not the hype, but the practical side: how AI fits into real products and workflows.
+- **Running** — the most honest feedback loop. No shortcuts, no hacks. You either put in the miles or you don't.
+- **Investing** — understanding markets as complex adaptive systems. Building rules to manage risk and emotion.
+- **Psychology** — why we make irrational decisions under pressure. Cognitive biases, emotional regulation, self-awareness.
+- **Reading** — the cheapest way to learn from people smarter than me. Books on systems thinking, decision-making, and human behavior.
+
+These topics look unrelated on the surface, but they share a common thread: they're all about understanding complex systems — whether built with code, driven by markets, or wired into the human brain. The skills transfer. Pattern recognition in distributed systems helps me read market structure. The emotional discipline from running helps me follow trading rules. Psychology explains why good engineers still make bad decisions.
+
+## My Philosophy
+
+I don't have a manifesto. But a few ideas keep showing up in how I work and think:
+
+- **Lifelong Learning** — the world changes too fast for any fixed skillset to stay relevant. The ability to learn is the only durable advantage.
+- **Long-term Thinking** — most good outcomes come from patience and compounding, not from optimizing for next week.
+- **Systems Thinking** — individual events are noisy. The system that produces them is the signal.
+- **Continuous Improvement** — small, consistent iterations beat grand plans. Ship, learn, adjust.
+- **Curiosity** — the willingness to ask "why does this work?" even when you're not required to.
+
+## Why This Website Exists
+
+This is a Digital Garden — a place where ideas are planted, tended, and sometimes pruned. It's not a blog with polished essays. Not every page represents a finished thought. Some notes are rough drafts, some are works in progress, and some might be wrong.
+
+I maintain this site because writing forces clarity. When I try to explain something — a market thesis, a technical concept, a book that changed my thinking — I discover the gaps in my own understanding. The act of documenting is the act of learning.
+
+> I don't write because I already have the answers.
+> I write because sharing helps me think more clearly.
+
+</div>
