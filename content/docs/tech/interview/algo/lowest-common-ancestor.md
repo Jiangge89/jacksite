@@ -1,5 +1,5 @@
 ---
-title: "Lowest Common Ancestor"
+title: "15. Lowest Common Ancestor"
 weight: 15
 ---
 

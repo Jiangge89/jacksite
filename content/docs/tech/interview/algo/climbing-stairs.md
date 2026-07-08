@@ -1,5 +1,5 @@
 ---
-title: "Climbing Stairs"
+title: "17. Climbing Stairs"
 weight: 17
 ---
 

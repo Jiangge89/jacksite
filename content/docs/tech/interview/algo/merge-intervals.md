@@ -1,5 +1,5 @@
 ---
-title: "Merge Intervals"
+title: "28. Merge Intervals"
 weight: 28
 ---
 

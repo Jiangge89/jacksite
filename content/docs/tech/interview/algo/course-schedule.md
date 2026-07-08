@@ -1,5 +1,5 @@
 ---
-title: "Course Schedule"
+title: "14. Course Schedule"
 weight: 14
 ---
 

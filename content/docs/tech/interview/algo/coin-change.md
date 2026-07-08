@@ -1,5 +1,5 @@
 ---
-title: "Coin Change"
+title: "18. Coin Change"
 weight: 18
 ---
 

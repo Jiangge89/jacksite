@@ -1,5 +1,5 @@
 ---
-title: "Unique Paths"
+title: "20. Unique Paths"
 weight: 20
 ---
 

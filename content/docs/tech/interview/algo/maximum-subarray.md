@@ -1,5 +1,5 @@
 ---
-title: "Maximum Subarray"
+title: "22. Maximum Subarray"
 weight: 22
 ---
 

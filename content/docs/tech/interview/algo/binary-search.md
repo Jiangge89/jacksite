@@ -1,5 +1,5 @@
 ---
-title: "Binary Search"
+title: "8. Binary Search"
 weight: 8
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: "Two Sum"
+title: "1. Two Sum"
 weight: 1
 ---
 

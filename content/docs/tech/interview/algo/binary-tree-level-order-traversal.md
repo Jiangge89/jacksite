@@ -1,5 +1,5 @@
 ---
-title: "Binary Tree Level Order Traversal"
+title: "16. Binary Tree Level Order Traversal"
 weight: 16
 ---
 

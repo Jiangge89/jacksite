@@ -1,5 +1,5 @@
 ---
-title: "Kth Largest Element"
+title: "10. Kth Largest Element"
 weight: 10
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: "Prefix Sums / Range Sum Query"
+title: "23. Prefix Sums / Range Sum Query"
 weight: 23
 ---
 

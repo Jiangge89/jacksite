@@ -1,5 +1,5 @@
 ---
-title: "Search in Rotated Sorted Array"
+title: "9. Search in Rotated Sorted Array"
 weight: 9
 ---
 

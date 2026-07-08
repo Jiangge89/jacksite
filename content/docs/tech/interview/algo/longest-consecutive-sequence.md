@@ -1,5 +1,5 @@
 ---
-title: "Longest Consecutive Sequence"
+title: "3. Longest Consecutive Sequence"
 weight: 3
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: "Group Anagrams"
+title: "2. Group Anagrams"
 weight: 2
 ---
 

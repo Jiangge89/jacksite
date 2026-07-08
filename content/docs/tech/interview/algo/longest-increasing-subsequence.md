@@ -1,5 +1,5 @@
 ---
-title: "Longest Increasing Subsequence"
+title: "21. Longest Increasing Subsequence"
 weight: 21
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: "Product of Array Except Self"
+title: "24. Product of Array Except Self"
 weight: 24
 ---
 

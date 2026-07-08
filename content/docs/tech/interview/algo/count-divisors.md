@@ -1,5 +1,5 @@
 ---
-title: "Count Divisors"
+title: "26. Count Divisors"
 weight: 26
 ---
 

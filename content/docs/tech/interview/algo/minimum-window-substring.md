@@ -1,5 +1,5 @@
 ---
-title: "Minimum Window Substring"
+title: "6. Minimum Window Substring"
 weight: 6
 ---
 
