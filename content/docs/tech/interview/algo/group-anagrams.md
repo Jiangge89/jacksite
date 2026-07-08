@@ -1,4 +1,6 @@
 ---
+date: 2026-07-08T15:17:00+08:00
+tags: ["HashMap", "sorting", "medium"]
 title: "2. Group Anagrams"
 weight: 2
 ---

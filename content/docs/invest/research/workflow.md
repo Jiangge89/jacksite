@@ -1,4 +1,6 @@
 ---
+date: 2026-07-07T20:00:00+08:00
+tags: ["AI Workflow", "DDOG", "NOW", "可观测性", "企业软件"]
 title: "AI Workflow"
 weight: 4
 ---

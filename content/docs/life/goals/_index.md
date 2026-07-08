@@ -1,5 +1,5 @@
 ---
-title: "Notes 笔记"
-weight: 5
+title: "Goals 目标"
+weight: 1
 bookCollapseSection: true
 ---

@@ -1,4 +1,6 @@
 ---
+date: 2026-07-08T15:17:00+08:00
+tags: ["prefix-sum", "easy"]
 title: "23. Prefix Sums / Range Sum Query"
 weight: 23
 ---

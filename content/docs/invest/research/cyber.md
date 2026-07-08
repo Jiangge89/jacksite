@@ -1,4 +1,6 @@
 ---
+date: 2026-07-07T20:00:00+08:00
+tags: ["Cybersecurity", "PANW", "CRWD", "零信任", "平台化"]
 title: "Cybersecurity"
 weight: 3
 ---

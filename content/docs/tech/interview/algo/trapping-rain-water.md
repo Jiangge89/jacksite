@@ -1,4 +1,6 @@
 ---
+date: 2026-07-08T15:17:00+08:00
+tags: ["prefix-sum", "two-pointers", "hard"]
 title: "25. Trapping Rain Water"
 weight: 25
 ---

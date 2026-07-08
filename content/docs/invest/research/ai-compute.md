@@ -1,4 +1,6 @@
 ---
+date: 2026-07-07T20:00:00+08:00
+tags: ["AI Compute", "NVDA", "AMD", "GPU", "半导体"]
 title: "AI Compute"
 weight: 1
 ---

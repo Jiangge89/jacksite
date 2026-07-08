@@ -1,4 +1,6 @@
 ---
+date: 2026-07-08T15:17:00+08:00
+tags: ["DFS", "topological-sort", "medium"]
 title: "14. Course Schedule"
 weight: 14
 ---

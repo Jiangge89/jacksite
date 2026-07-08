@@ -1,4 +1,6 @@
 ---
+date: 2026-07-08T15:17:00+08:00
+tags: ["binary-search", "medium"]
 title: "9. Search in Rotated Sorted Array"
 weight: 9
 ---

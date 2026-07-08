@@ -1,4 +1,6 @@
 ---
+date: 2026-07-08T15:17:00+08:00
+tags: ["sliding-window", "HashMap", "hard"]
 title: "6. Minimum Window Substring"
 weight: 6
 ---

@@ -1,4 +1,6 @@
 ---
+date: 2026-07-08T15:17:00+08:00
+tags: ["DFS", "tree", "medium"]
 title: "15. Lowest Common Ancestor"
 weight: 15
 ---

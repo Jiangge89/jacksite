@@ -1,4 +1,6 @@
 ---
+date: 2026-07-08T15:17:00+08:00
+tags: ["prefix-sum", "medium"]
 title: "24. Product of Array Except Self"
 weight: 24
 ---

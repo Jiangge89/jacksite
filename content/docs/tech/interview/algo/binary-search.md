@@ -1,4 +1,6 @@
 ---
+date: 2026-07-08T15:17:00+08:00
+tags: ["binary-search", "easy"]
 title: "8. Binary Search"
 weight: 8
 ---

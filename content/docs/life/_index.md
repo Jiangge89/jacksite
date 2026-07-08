@@ -1,5 +1,5 @@
 ---
-title: "Notes 笔记"
-weight: 5
+title: "Life 人生"
+weight: 6
 bookCollapseSection: true
 ---

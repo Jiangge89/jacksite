@@ -1,4 +1,6 @@
 ---
+date: 2026-07-08T15:17:00+08:00
+tags: ["HashMap", "set", "medium"]
 title: "3. Longest Consecutive Sequence"
 weight: 3
 ---
