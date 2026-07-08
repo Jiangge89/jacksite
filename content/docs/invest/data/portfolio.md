@@ -3,7 +3,7 @@ title: "Portfolio"
 weight: 1
 ---
 
-Updated: 2026-07-07
+Updated: 2026-07-07 (收盘价)
 
 ## Account Summary
 

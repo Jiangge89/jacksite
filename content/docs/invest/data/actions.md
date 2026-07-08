@@ -13,9 +13,9 @@ weight: 4
 
 ## 待执行
 
-- [ ] AMD 继续减到 10%（~29 股），Aug 4 财报前完成
-- [ ] 考虑 DDOG 加仓到 Full (10%)
-- [ ] Jul 15-17：earnings-preview TSLA
+- [ ] AMD 继续减到 30 股（本周目标），最终减到 ~29 股（10%），Aug 4 财报前完成
+- [ ] 考虑 DDOG 加仓到 Full (10%)，需量能 + HH/HL 确认
+- [ ] Jul 10-11：earnings-preview TSLA
 - [ ] Jul 22-24：earnings-preview META
 - [ ] Jul 28-30：earnings-preview AMD
 - [ ] Jul 底：earnings-preview DDOG
@@ -25,3 +25,5 @@ weight: 4
 
 - [ ] 每周一更新 portfolio
 - [ ] DDOG 观察加仓机会
+- [ ] CCXI 关注 13-15 区间建仓
+- [ ] VPG 走势观察
