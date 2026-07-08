@@ -5,7 +5,7 @@ layout: hextra-home
 
 <div class="hx:mt-6 hx:mb-6">
 {{< hextra/hero-headline >}}
-  个人成长记录
+  Growth Journal
 {{< /hextra/hero-headline >}}
 </div>
 
@@ -17,28 +17,28 @@ layout: hextra-home
 
 {{< hextra/feature-grid >}}
   {{< hextra/feature-card
-    title="投资"
-    subtitle="交易日志 · 持仓数据 · 行业研究 · 交易规则"
+    title="Invest 投资"
+    subtitle="Journal · Portfolio · Research · Rules"
     link="docs/invest"
   >}}
   {{< hextra/feature-card
-    title="技术"
-    subtitle="开发笔记 · 工具 · 架构"
+    title="Tech 技术"
+    subtitle="Dev Notes · Tools · Architecture"
     link="docs/tech"
   >}}
   {{< hextra/feature-card
-    title="跑步"
-    subtitle="训练记录 · 比赛"
+    title="Running 跑步"
+    subtitle="Training Log · Races"
     link="docs/running"
   >}}
   {{< hextra/feature-card
-    title="读书"
-    subtitle="读书笔记 · 思考"
+    title="Reading 读书"
+    subtitle="Book Notes · Reflections"
     link="docs/reading"
   >}}
   {{< hextra/feature-card
-    title="健康"
-    subtitle="饮食 · 睡眠 · 习惯"
+    title="Health 健康"
+    subtitle="Diet · Sleep · Habits"
     link="docs/health"
   >}}
 {{< /hextra/feature-grid >}}

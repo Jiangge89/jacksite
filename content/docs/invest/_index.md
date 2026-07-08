@@ -1,5 +1,5 @@
 ---
-title: "投资"
+title: "Invest 投资"
 weight: 1
 bookCollapseSection: true
 ---

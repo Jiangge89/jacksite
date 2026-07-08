@@ -1,5 +1,5 @@
 ---
-title: "身体"
+title: "Physical 身体"
 weight: 1
 bookCollapseSection: true
 ---

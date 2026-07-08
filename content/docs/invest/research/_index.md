@@ -1,5 +1,5 @@
 ---
-title: "行业研究"
+title: "Research 研究"
 weight: 3
 bookCollapseSection: true
 ---

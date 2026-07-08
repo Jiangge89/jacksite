@@ -1,5 +1,5 @@
 ---
-title: "日志"
+title: "Journal 日志"
 weight: 1
 bookCollapseSection: true
 ---
