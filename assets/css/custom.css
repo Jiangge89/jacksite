@@ -65,6 +65,18 @@
   margin: 0 auto;
 }
 
+.garden-hero .hero-intro hr {
+  width: 48px;
+  height: 1px;
+  background: #d0d0d0;
+  margin: 2.5rem auto;
+  border: none;
+}
+
+:root[class~="dark"] .garden-hero .hero-intro hr {
+  background: #444;
+}
+
 :root[class~="dark"] .garden-hero .hero-intro {
   color: #bbb;
 }
