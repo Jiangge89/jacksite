@@ -1,12 +1,7 @@
-/* ── Sidebar: always expanded, no collapse arrows ── */
+/* ── Sidebar: hide collapse arrows ── */
 
 .hextra-sidebar-collapsible-button {
   display: none !important;
-}
-
-.hextra-sidebar-children {
-  height: auto !important;
-  overflow: visible !important;
 }
 
 /* ── Digital Garden: Home Hero ── */
