@@ -16,31 +16,13 @@ Outside of work, I run, read, and trade stocks. I'm drawn to psychology — unde
 
 This website is my Digital Garden — a place where I document projects, write technical notes, share reading reflections, and track what I'm learning over time. Not everything here is polished. Some ideas are seeds, some are still growing. That's the point.
 
-  </div>
-</div>
+---
 
-<div class="garden-sections">
-  <h2>Explore</h2>
-  <div class="garden-grid">
-    <a href="{{< relref "/docs/invest" >}}">
-      <p class="section-title">Invest 投资</p>
-      <p class="section-desc">Journal · Portfolio · Research · Rules</p>
-    </a>
-    <a href="{{< relref "/docs/tech" >}}">
-      <p class="section-title">Tech 技术</p>
-      <p class="section-desc">Dev Notes · Tools · Architecture</p>
-    </a>
-    <a href="{{< relref "/docs/running" >}}">
-      <p class="section-title">Running 跑步</p>
-      <p class="section-desc">Training Log · Races</p>
-    </a>
-    <a href="{{< relref "/docs/reading" >}}">
-      <p class="section-title">Reading 读书</p>
-      <p class="section-desc">Book Notes · Reflections</p>
-    </a>
-    <a href="{{< relref "/docs/health" >}}">
-      <p class="section-title">Health 健康</p>
-      <p class="section-desc">Diet · Sleep · Habits</p>
-    </a>
+我是一名后端工程师，有十年以上大规模分布式系统的开发和维护经验。近几年，我的关注点转向了 AI 应用——探索如何将智能融入真实的产品和工作流。
+
+工作之外，我跑步、读书、做股票投机。我对心理学很感兴趣——理解我们为什么会在压力下做出那些决定。这些兴趣看似零散，但它们有一条共同的线索：理解复杂系统，无论它们是用代码构建的、被市场驱动的，还是写进人类大脑的。
+
+这个网站是我的 Digital Garden——一个记录项目、写技术笔记、分享读书感悟、追踪学习轨迹的地方。这里不是每篇文章都经过打磨，有些想法还只是种子，有些还在生长。这就是它的意义。
+
   </div>
 </div>
