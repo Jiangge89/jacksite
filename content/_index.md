@@ -16,7 +16,9 @@ Outside of work, I run, read, and trade stocks. I'm drawn to psychology — unde
 
 This website is my Digital Garden — a place where I document projects, write technical notes, share reading reflections, and track what I'm learning over time. Not everything here is polished. Some ideas are seeds, some are still growing. That's the point.
 
+
 ---
+
 
 我是一名后端工程师，有十年以上大规模分布式系统的开发和维护经验。近几年，我的关注点转向了 AI 应用——探索如何将智能融入真实的产品和工作流。
 
