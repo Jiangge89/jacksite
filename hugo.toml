@@ -19,30 +19,6 @@ enableInlineShortcodes = true
 
 [menu]
   [[menu.main]]
-    name = 'Invest 投资'
-    pageRef = '/docs/invest'
-    weight = 1
-  [[menu.main]]
-    name = 'Tech 技术'
-    pageRef = '/docs/tech'
-    weight = 2
-  [[menu.main]]
-    name = 'Running 跑步'
-    pageRef = '/docs/running'
-    weight = 3
-  [[menu.main]]
-    name = 'Reading 读书'
-    pageRef = '/docs/reading'
-    weight = 4
-  [[menu.main]]
-    name = 'Health 健康'
-    pageRef = '/docs/health'
-    weight = 5
-  [[menu.main]]
-    name = 'About 关于'
-    pageRef = '/docs/about'
-    weight = 6
-  [[menu.main]]
     name = 'Search'
     weight = 7
     [menu.main.params]
