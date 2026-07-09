@@ -5,39 +5,39 @@ title: "Portfolio"
 weight: 1
 ---
 
-Updated: 2026-07-09 (持仓数量已更新，价格待下次周一更新)
+Updated: 2026-07-09 (价格为 Jul 8 收盘价，部分为近似值)
 
 ## Account Summary
 
-Total Equity: — (待更新) | Cash: — (AMD 减仓回笼 + 买入 CCXI)
+Total Equity: $135,608 | Cash: $31,382
 
 ## Holdings
 
 | Ticker | Shares | Cost | Price | Value | % | P&L | Status |
 |--------|--------|------|-------|-------|---|-----|--------|
-| AMD | 30 | $154 | — | — | — | — | 已减仓至 30 股 |
-| ABAT | 5,000 | -$0.17 | — | — | — | — | 零成本 |
-| PANW | 40 | $279 | — | — | — | — | Full |
-| DDOG | 50 | $240 | — | — | — | — | Half |
-| BA | 50 | $86.55 | — | — | — | — | Half |
-| NVAX | 1,000 | $8.27 | — | — | — | — | Half |
-| MSFT | 20 | $410.58 | — | — | — | — | Half |
-| NVDA | 30 | $214 | — | — | — | — | Starter |
-| ZS | 30 | $218.70 | — | — | — | — | Starter |
-| TSLA | 10 | $427.85 | — | — | — | — | Starter |
-| OUST | 80 | $46.94 | — | — | — | — | Starter |
-| NOW | 20 | $104.10 | — | — | — | — | Starter |
-| CCXI | 100 | — | — | — | — | — | 观察仓 |
+| ABAT | 5,000 | -$0.17 | ~$3.38 | ~$16,900 | 12.5% | — | 零成本 |
+| AMD | 30 | $154 | ~$510 | ~$15,300 | **11.3%** | +231% | ✅ 低于 15% cap |
+| PANW | 40 | $279 | ~$338 | ~$13,520 | 10.0% | +21% | Full |
+| DDOG | 50 | $240 | ~$261 | ~$13,050 | 9.6% | +9% | Half |
+| BA | 50 | $86.55 | ~$225 | ~$11,250 | 8.3% | +160% | Half |
+| NVAX | 1,000 | $8.27 | ~$9.35 | ~$9,350 | 6.9% | +13% | Half |
+| MSFT | 20 | $410.58 | ~$383 | ~$7,660 | 5.6% | -7% | Half |
+| NVDA | 30 | $214 | ~$204 | ~$6,120 | 4.5% | -5% | Starter |
+| ZS | 30 | $218.70 | ~$144 | ~$4,320 | 3.2% | -34% | Starter |
+| TSLA | 10 | $427.85 | ~$394 | ~$3,940 | 2.9% | -8% | Starter |
+| OUST | 80 | $46.94 | ~$43.46 | ~$3,477 | 2.6% | -7% | Starter |
+| NOW | 20 | $104.10 | ~$106 | ~$2,120 | 1.6% | +2% | Starter |
+| CCXI | 100 | ~$16 | ~$16 | ~$1,600 | 1.2% | ~0% | 观察仓 |
 
 ## Sector Exposure
 
-| Sector | Tickers | Status |
-|--------|---------|--------|
-| AI Compute | AMD + NVDA | AMD 减仓后应大幅改善 |
-| Cyber | PANW + ZS | OK |
-| Workflow | DDOG + NOW | OK |
-| Robotics | TSLA + OUST | OK |
-| Cloud | MSFT | OK |
+| Sector | Tickers | % | Status |
+|--------|---------|---|--------|
+| AI Compute | AMD + NVDA | 15.8% | ✅ 大幅改善 |
+| Cyber | PANW + ZS | 13.2% | OK |
+| Workflow | DDOG + NOW | 11.2% | OK |
+| Robotics | TSLA + OUST | 5.5% | OK |
+| Cloud | MSFT | 5.6% | OK |
 
 ## 已清仓
 
@@ -49,6 +49,7 @@ Total Equity: — (待更新) | Cash: — (AMD 减仓回笼 + 买入 CCXI)
 
 ## Risk Flags
 
-1. AMD 已减仓至 30 股，待更新价格确认占比
-2. 期权学习完成前不开新仓
-3. 下次周一更新 Total Equity 和所有价格
+1. AMD 11.3% — ✅ 低于 15% cap。Aug 4 财报前考虑微调到 10%
+2. AI Compute 板块 15.8% — 远低于 25% 上限
+3. Cash 23.1% — 弹药充足
+4. ZS -34% 最大亏损股，关注止损
