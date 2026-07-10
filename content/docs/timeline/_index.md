@@ -163,9 +163,29 @@ weight: 7
 
 <div class="tl-year">2024</div>
 
+<div class="tl-item" data-cat="reading">
+  <span class="tl-month">Apr</span>
+  <span class="tl-text">阅读《不原谅也没关系》 <span class="tl-tag">读书</span></span>
+</div>
+
 <div class="tl-item" data-cat="psych">
   <span class="tl-month">Jul</span>
   <span class="tl-text">开始接触心理学 <span class="tl-tag">心理</span></span>
+</div>
+
+<div class="tl-item" data-cat="reading">
+  <span class="tl-month">Oct</span>
+  <span class="tl-text">阅读《中年之路》 <span class="tl-tag">读书</span></span>
+</div>
+
+<div class="tl-item" data-cat="tech">
+  <span class="tl-month">—</span>
+  <span class="tl-text">开发 Mobile Application <span class="tl-tag">技术</span></span>
+</div>
+
+<div class="tl-item" data-cat="reading">
+  <span class="tl-month">Dec</span>
+  <span class="tl-text">阅读《自卑与超越》《被讨厌的勇气》 <span class="tl-tag">读书</span></span>
 </div>
 
 <div class="tl-item" data-cat="running">
@@ -175,19 +195,14 @@ weight: 7
 
 <div class="tl-year">2025</div>
 
+<div class="tl-item" data-cat="reading">
+  <span class="tl-month">Jan</span>
+  <span class="tl-text">阅读《深度关系》 <span class="tl-tag">读书</span></span>
+</div>
+
 <div class="tl-item" data-cat="psych">
   <span class="tl-month">—</span>
   <span class="tl-text">开始系统研究心理学 <span class="tl-tag">心理</span></span>
-</div>
-
-<div class="tl-item" data-cat="reading">
-  <span class="tl-month">—</span>
-  <span class="tl-text">阅读 20 本书 <span class="tl-tag">读书</span></span>
-</div>
-
-<div class="tl-item" data-cat="tech">
-  <span class="tl-month">—</span>
-  <span class="tl-text">开发 Mobile Application <span class="tl-tag">技术</span></span>
 </div>
 
 <div class="tl-item" data-cat="running">
@@ -195,16 +210,71 @@ weight: 7
   <span class="tl-text">第一次跑 2XU 半程马拉松 <span class="tl-tag">跑步</span></span>
 </div>
 
+<div class="tl-item" data-cat="reading">
+  <span class="tl-month">Jun</span>
+  <span class="tl-text">阅读《悉达多》 <span class="tl-tag">读书</span></span>
+</div>
+
+<div class="tl-item" data-cat="reading">
+  <span class="tl-month">Jul</span>
+  <span class="tl-text">阅读《蛤蟆去看心理医生》 <span class="tl-tag">读书</span></span>
+</div>
+
+<div class="tl-item" data-cat="reading">
+  <span class="tl-month">Sep</span>
+  <span class="tl-text">阅读《无条件养育》 <span class="tl-tag">读书</span></span>
+</div>
+
+<div class="tl-item" data-cat="reading">
+  <span class="tl-month">Nov</span>
+  <span class="tl-text">阅读《早安，怪物》《纳瓦尔宝典》 <span class="tl-tag">读书</span></span>
+</div>
+
 <div class="tl-item" data-cat="running">
   <span class="tl-month">Dec</span>
   <span class="tl-text">第一次完成 SG 渣打马拉松 🏅 <span class="tl-tag">跑步</span></span>
 </div>
 
+<div class="tl-item" data-cat="reading">
+  <span class="tl-month">Dec</span>
+  <span class="tl-text">阅读《局外人》 <span class="tl-tag">读书</span></span>
+</div>
+
 <div class="tl-year">2026</div>
+
+<div class="tl-item" data-cat="reading">
+  <span class="tl-month">Feb</span>
+  <span class="tl-text">阅读《镖人》 <span class="tl-tag">读书</span></span>
+</div>
+
+<div class="tl-item" data-cat="reading">
+  <span class="tl-month">Mar</span>
+  <span class="tl-text">阅读《控糖革命》 <span class="tl-tag">读书</span></span>
+</div>
+
+<div class="tl-item" data-cat="running">
+  <span class="tl-month">Apr</span>
+  <span class="tl-text">第二次跑 2XU 半程马拉松 <span class="tl-tag">跑步</span></span>
+</div>
+
+<div class="tl-item" data-cat="reading">
+  <span class="tl-month">Apr</span>
+  <span class="tl-text">阅读《Educated》《也许你该找个人聊聊》《思考，快与慢》 <span class="tl-tag">读书</span></span>
+</div>
+
+<div class="tl-item" data-cat="reading">
+  <span class="tl-month">Jun</span>
+  <span class="tl-text">阅读《Atomic Habits》《这世界既温柔又残酷》《金钱心理学》《股市交易心理学》《炒股的智慧》 <span class="tl-tag">读书</span></span>
+</div>
 
 <div class="tl-item" data-cat="invest">
   <span class="tl-month">Jul</span>
   <span class="tl-text">开始系统学习投资，建立交易规则 <span class="tl-tag">投资</span></span>
+</div>
+
+<div class="tl-item" data-cat="reading">
+  <span class="tl-month">Jul</span>
+  <span class="tl-text">阅读《Best Loser Wins》 <span class="tl-tag">读书</span></span>
 </div>
 
 <div class="tl-item" data-cat="tech">
