@@ -20,7 +20,7 @@ Maximum Position: 10% | Sector Cap: 25%
 | ABAT | 5,000 | -0.17 | ~3.38 | ~16,900 | 12.2% | Battery | 零成本 |
 | AMD | 30 | -658 | ~547 | ~16,410 | **11.8%** | AI Compute | ✅ 低于 15% cap |
 | PANW | 40 | 279.04 | ~337 | ~13,480 | 9.7% | Cyber | Full |
-| DDOG | 50 | 240.08 | ~269 | ~13,450 | 9.7% | Workflow | Half |
+| DDOG | 50 | 240.08 | ~269 | ~13,450 | 9.7% | Cyber | Half |
 | BA | 50 | 86.55 | ~225 | ~11,250 | 8.1% | Aerospace | Half |
 | NVAX | 1,000 | 8.27 | ~9.59 | ~9,590 | 6.9% | Biotech | Half |
 | MSFT | 20 | 410.58 | ~383 | ~7,660 | 5.5% | Cloud | Half |
@@ -36,8 +36,8 @@ Maximum Position: 10% | Sector Cap: 25%
 | Sector | Tickers | % | Status |
 |--------|---------|---|--------|
 | AI Compute | AMD + NVDA | 16.2% | ✅ OK |
-| Cyber | PANW + ZS | 12.8% | OK |
-| Workflow | DDOG + NOW | 11.2% | OK |
+| Cyber | PANW + ZS + DDOG | 22.5% | ⚠️ 接近上限 |
+| Workflow | NOW | 1.5% | OK |
 | Robotics | TSLA + OUST | 5.7% | OK |
 | Cloud | MSFT | 5.5% | OK |
 
