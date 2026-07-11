@@ -1,5 +1,5 @@
 ---
-date: 2026-07-10T20:00:00+08:00
+date: 2026-07-11T20:00:00+08:00
 tags: ["待办", "执行计划"]
 title: "Actions"
 weight: 4
@@ -14,9 +14,12 @@ weight: 4
 - [x] MBLY 清仓
 - [x] earnings-preview TSLA（Jul 10 完成）
 
-## 待执行
+## 资金再配置
 
 - [ ] 考虑 DDOG 加仓到 Full (10%)，需量能 + HH/HL 确认
+
+## 财报前
+
 - [ ] Jul 22-24：earnings-preview META
 - [ ] Jul 28-30：earnings-preview AMD
 - [ ] Jul 底：earnings-preview DDOG
@@ -26,6 +29,6 @@ weight: 4
 
 - [ ] 每周一更新 portfolio
 - [ ] DDOG 观察加仓机会
+- [ ] ABAT 减仓计划：$4-5 卖 2,000 股 → $5+ 卖 2,000 股 → 保留 1,000 股。之后最高持仓不超过 2,000 股
 - [ ] CCXI 观察仓持有
-- [ ] VPG 走势观察（妻子账户）
 - [ ] IBKR 日内账户设置
