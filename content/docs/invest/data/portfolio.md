@@ -1,62 +1,60 @@
 ---
-date: 2026-07-10T20:00:00+08:00
+date: 2026-07-14T20:00:00+08:00
 tags: ["持仓", "仓位"]
 title: "Portfolio"
 weight: 1
 ---
 
-Updated: 2026-07-10 (价格为 Jul 9-10 收盘价，部分为近似值)
+Updated: 2026-07-14 (价格为 Jul 11 收盘近似值，基于搜索数据 + 总市值倒推)
 
 ## Account Summary
 
-Total Equity: $138,901 | Cash: $31,878
-
-Maximum Position: 10% | Sector Cap: 25%
+Total Equity: $135,816 | Cash: $32,372
 
 ## Holdings
 
 | Ticker | Shares | Cost | Price | Value | % | Sector | Status |
 |--------|--------|------|-------|-------|---|--------|--------|
-| ABAT | 5,000 | -0.17 | ~3.38 | ~16,900 | 12.2% | Battery | 零成本 |
-| AMD | 30 | -658 | ~547 | ~16,410 | **11.8%** | AI Compute | ✅ 低于 15% cap |
-| PANW | 40 | 279.04 | ~337 | ~13,480 | 9.7% | Cyber | Full |
-| DDOG | 50 | 240.08 | ~269 | ~13,450 | 9.7% | Cyber | Half |
-| BA | 50 | 86.55 | ~225 | ~11,250 | 8.1% | Aerospace | Half |
-| NVAX | 1,000 | 8.27 | ~9.59 | ~9,590 | 6.9% | Biotech | Half |
-| MSFT | 20 | 410.58 | ~383 | ~7,660 | 5.5% | Cloud | Half |
-| NVDA | 30 | 214.00 | ~204 | ~6,120 | 4.4% | AI Compute | Starter |
-| ZS | 30 | 218.70 | ~144 | ~4,320 | 3.1% | Cyber | Starter |
-| TSLA | 10 | 427.85 | ~407 | ~4,070 | 2.9% | Robotics | Starter |
-| OUST | 80 | 46.94 | ~48 | ~3,840 | 2.8% | Robotics | Starter |
-| NOW | 20 | 104.10 | ~106 | ~2,120 | 1.5% | Workflow | Starter |
-| CCXI | 100 | ~16.00 | ~15.26 | ~1,526 | 1.1% | Other | 观察仓 |
+| AMD | 30 | -658 | ~534 | ~16,020 | 11.8% | AI Compute | ✅ 低于 15% cap |
+| DDOG | 50 | 240.08 | ~265 | ~13,250 | 9.8% | Cyber | Half |
+| PANW | 40 | 279.04 | ~328 | ~13,120 | 9.7% | Cyber | Full |
+| ABAT | 5,000 | -0.17 | ~2.62 | ~13,100 | 9.6% | Battery | 零成本 |
+| BA | 50 | 86.55 | ~215 | ~10,750 | 7.9% | Aerospace | Half |
+| NVAX | 1,000 | 8.27 | ~9.20 | ~9,200 | 6.8% | Biotech | Half |
+| MSFT | 20 | 410.58 | ~380 | ~7,600 | 5.6% | Cloud | Half |
+| NVDA | 30 | 214.00 | ~197 | ~5,910 | 4.4% | AI Compute | Starter |
+| ZS | 30 | 218.70 | ~136 | ~4,080 | 3.0% | Cyber | Starter |
+| TSLA | 10 | 427.85 | ~385 | ~3,850 | 2.8% | Robotics | Starter |
+| OUST | 80 | 46.94 | ~42 | ~3,360 | 2.5% | Robotics | Starter |
+| NOW | 20 | 104.10 | ~110 | ~2,200 | 1.6% | Workflow | Starter |
+| CCXI | 100 | ~16 | ~15 | ~1,500 | 1.1% | Other | 观察仓 |
 
 ## Sector Exposure
 
 | Sector | Tickers | % | Status |
 |--------|---------|---|--------|
-| AI Compute | AMD + NVDA | 16.2% | ✅ OK |
 | Cyber | PANW + ZS + DDOG | 22.5% | ⚠️ 接近上限 |
-| Workflow | NOW | 1.5% | OK |
-| Robotics | TSLA + OUST | 5.7% | OK |
-| Cloud | MSFT | 5.5% | OK |
+| AI Compute | AMD + NVDA | 16.2% | ✅ OK |
+| Cloud | MSFT | 5.6% | OK |
+| Robotics | TSLA + OUST | 5.3% | OK |
+| Workflow | NOW | 1.6% | OK |
 
 ## P&L Summary
 
 | Ticker | Cost | Price | P&L |
 |--------|------|-------|-----|
-| AMD | -658 | ~547 | 零成本+ |
-| BA | 86.55 | ~225 | **+160%** |
-| PANW | 279.04 | ~337 | **+21%** |
-| NVAX | 8.27 | ~9.59 | +16% |
-| DDOG | 240.08 | ~269 | +12% |
-| OUST | 46.94 | ~48 | +2% |
-| NOW | 104.10 | ~106 | +2% |
-| CCXI | ~16 | ~15.26 | -5% |
-| NVDA | 214.00 | ~204 | **-5%** |
-| TSLA | 427.85 | ~407 | **-5%** |
-| MSFT | 410.58 | ~383 | **-7%** |
-| ZS | 218.70 | ~144 | **-34%** |
+| AMD | -658 | ~534 | 零成本+ |
+| BA | 86.55 | ~215 | **+148%** |
+| PANW | 279.04 | ~328 | **+18%** |
+| NVAX | 8.27 | ~9.20 | +11% |
+| DDOG | 240.08 | ~265 | +10% |
+| NOW | 104.10 | ~110 | +6% |
+| CCXI | ~16 | ~15 | -6% |
+| MSFT | 410.58 | ~380 | **-7%** |
+| NVDA | 214.00 | ~197 | **-8%** |
+| TSLA | 427.85 | ~385 | **-10%** |
+| OUST | 46.94 | ~42 | **-11%** |
+| ZS | 218.70 | ~136 | **-38%** |
 
 ## 已清仓
 
@@ -68,8 +66,10 @@ Maximum Position: 10% | Sector Cap: 25%
 
 ## Risk Flags
 
-1. AMD 11.8% — ✅ 低于 15% cap。Aug 4 财报前考虑微调到 10%
-2. AI Compute 板块 16.2% — ✅ 低于 25% 上限
-3. Cash 22.9% — 弹药充足
-4. ZS -34% 最大亏损股，关注止损
-5. CPI 数据 Jul 14（美东 8:30 AM）
+1. ABAT 大幅下跌（约 -22%），从 12.2% 降至 9.6%。跌破 $2.40 执行减仓
+2. Cyber 板块 22.5% — ⚠️ 接近 25% 上限
+3. ZS -38% 最大亏损股，已减仓过，持有观察
+4. OUST -11%，超过 -10% 冻结加仓线
+5. Cash 23.8% — 弹药充足
+6. CPI 数据 Jul 14。Fed 主席 Warsh 国会作证 Jul 14-15
+7. TSLA Jul 22 财报，AMD Jul 22-23 AI 大会
