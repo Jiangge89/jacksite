@@ -5,7 +5,7 @@ title: "Portfolio"
 weight: 1
 ---
 
-Updated: 2026-07-15 (盘中实时价格，来自 Futu 截图)
+Updated: 2026-07-15 (Jul 15 盘中实时价格，来自 Futu 截图)
 
 ## Account Summary
 

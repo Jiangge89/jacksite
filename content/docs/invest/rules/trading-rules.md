@@ -1,11 +1,11 @@
 ---
-date: 2026-07-15T06:00:00+08:00
+date: 2026-07-16T20:00:00+08:00
 tags: ["交易规则", "仓位管理", "止盈止损", "财报操作"]
 title: "中线交易规则"
 weight: 1
 ---
 
-Updated: 2026-07-14
+Updated: 2026-07-16
 
 ## Position Sizing
 
@@ -116,6 +116,16 @@ Anchoring
 Dip-buying impulse
 
 Always wait 30 minutes before large trades.
+
+---
+
+## Account Separation（铁律）
+
+Futu = 中线趋势交易。**禁止任何日内操作，包括做 T。**
+
+IBKR = 短线/日内交易。所有日内操作在此执行，严格遵守日内交易规则。
+
+目的：物理隔离情绪。中线账户看到持仓价格会产生锚定，用锚定心态做日内 = 亏损放大器。
 
 ---
 
