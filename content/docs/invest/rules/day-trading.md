@@ -1,9 +1,11 @@
 ---
-date: 2026-07-16T20:00:00+08:00
+date: 2026-07-20T10:00:00+08:00
 tags: ["日内交易", "TQQQ", "SQQQ", "VWAP", "技术分析"]
 title: "日内交易规则 (IBKR)"
 weight: 2
 ---
+
+# Day Trading Rules (IBKR)
 
 Updated: 2026-07-16
 
