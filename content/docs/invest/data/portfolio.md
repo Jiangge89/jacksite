@@ -1,5 +1,5 @@
 ---
-date: 2026-07-20T10:00:00+08:00
+date: 2026-07-22T10:00:00+08:00
 tags: ["持仓", "仓位"]
 title: "Portfolio"
 weight: 1
@@ -7,11 +7,11 @@ weight: 1
 
 # Portfolio
 
-Updated: 2026-07-18 (Jul 17 操作后更新)
+Updated: 2026-07-21 (周一 Total Equity 更新)
 
 ## Account Summary
 
-Total Equity: $134,145
+Total Equity: $133,380
 
 Cash: $31,724
 
