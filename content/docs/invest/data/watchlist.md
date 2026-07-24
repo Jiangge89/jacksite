@@ -1,5 +1,5 @@
 ---
-date: 2026-07-22T10:00:00+08:00
+date: 2026-07-24T10:00:00+08:00
 tags: ["选股", "AI Compute", "Cyber", "Workflow", "Robotics"]
 title: "Watchlist"
 weight: 2
@@ -11,11 +11,11 @@ weight: 2
 
 | Ticker | Theme | Conviction | Trend | Current Position | Notes |
 |--------|-------|------------|-------|-----------------|-------|
-| AMD | AI Compute | High | ~$547, 横盘 | 30 (11.8%) | ✅ 已减仓至合规。Jul 22-23 Advancing AI 大会催化剂。Aug 4 财报前考虑微调到 10% |
-| PANW | Cyber | High | ~$337, 反弹中 | 40 (9.7%) | RSI 修正后反弹 +5.5%。基本面没变 |
-| DDOG | Workflow | High | Strong, ~$264 | 60 (11.5%) | Benchmark 目标价上调 $330。板块轮动受益，中短期看好 |
+| AMD | AI Compute | High | ~$529, 回调中 | 25 (10.4%) | Jul 24 减 5 股 @ $549。大会利好落地（Helios/Anthropic 2GW/$5B），"买预期卖事实"。Aug 4 财报 |
+| PANW | Cyber | High | ~$324, 回调中 | 40 (~10%) | 从 $354 回落 -8.4%，跟随大盘非基本面驱动 |
+| DDOG | Workflow | High | ~$246, 回调中 | 60 (~11%) | 超 Full，Aug 6 财报前须减至 10%。Benchmark $330 目标价 |
 | OUST | Robotics Sensor | High | 反弹中, ~$48 | 80 (2.8%) | LiDAR。等趋势确认再加 |
-| TSLA | Robotics | High | ~$407, 反弹中 | 10 (2.9%) | Jul 22 财报。Earnings preview 已完成 |
+| TSLA | Robotics | High | ~$320, 财报暴跌 | 10 (2.4%) | Jul 22 财报 miss（EPS $0.33 vs $0.53），-14.5%。浮亏 -25% 但 thesis 不变，仓位可控，决定持有 |
 
 ---
 
@@ -23,7 +23,7 @@ weight: 2
 
 | Ticker | Theme | Position | P&L | Notes |
 |--------|-------|----------|-----|-------|
-| NOW | Workflow | 20 (1.5%) | +2% | 企业 AI 工作流自动化 |
+| NOW | Workflow | 40 (2.9%) | -4% | Jul 24 加仓 20 股 @ $96。Q2 beat，AI ACV $1B+，thesis 验证 |
 | ZS | Cyber | 30 (3.1%) | -34% | 零信任，增速放缓。最大亏损股，关注止损 |
 | NVDA | AI Compute | 30 (4.4%) | -5% | 估值有吸引力 |
 | MSFT | Cloud | 20 (5.5%) | -7% | Azure + OpenAI + Copilot |
@@ -47,16 +47,16 @@ weight: 2
 ## Theme Watch
 
 ### Robotics
-回调中。Tesla Optimus V3 量产 7-8 月是催化剂。OUST 持续走弱。
+TSLA 财报暴跌 -14.5%，capex +142% 投 AI/Robotics，FCF 转负。短期盈利存疑但长期 thesis 不变。OUST 持续走弱。
 
 ### AI Compute
-横盘分歧中。AMD Jul 22-23 Advancing AI 大会。NVDA 逆势强。短期方向未定。
+AMD Advancing AI 大会利好全部落地（Helios/Anthropic 2GW/$5B/12GW）。"买预期卖事实"，股价 -4%。分析师上调目标价 $600-700。NVDA 相对抗跌。
 
 ### Cloud
-强势。Jul 28-30 财报集中验证（META/GOOG/AMZN）。
+GOOGL Cloud +82% 但 capex 上调至 $195-205B 引发恐慌。Jul 29 META/MSFT 财报是下一验证点。
 
 ### Workflow
-DDOG + NOW。DDOG Benchmark Street high $330，板块轮动受益。IBM 财报短期拖累但 SaaS 整体未受影响。
+NOW Q2 beat（EPS $0.90 vs $0.86），AI ACV $1B+，部署量 9 个月增 9 倍。Thesis 强化，板块最强。DDOG 被大盘拖累 -3.5%。
 
 ### Cyber
-PANW + ZS。板块轮动受益大涨。CRWD 微放量破新高。ZS +7.24% 形成 higher low。PANW 回踩 20MA 后上涨。
+大盘回调拖累。PANW 从 $354 跌至 $324（-8.4%）。非基本面驱动。
