@@ -54,6 +54,8 @@ Thesis 成立（纯技术交易可忽略）+ 周线保持 Bullish（方向）+ �
 
 所有新仓：必须 Starter 仓位，禁止 Half/Full。
 
+清仓后至少等 48 小时（2 个交易日）才能重新入场同一标的。
+
 ---
 
 ## Position Sizing
@@ -72,6 +74,10 @@ Hard cap: 15% — 任何情况不得超过
 
 板块上限: 25% (同一 Theme 下所有持仓+期权合计)
 
+单板块持仓上限: 3 只个股
+
+总持仓上限: 15 只个股
+
 浮亏 >10%: 冻结加仓, 重新评估 Thesis
 
 浮亏 >20%: 清仓（保险丝）
@@ -80,9 +86,9 @@ Hard cap: 15% — 任何情况不得超过
 
 ## Add Rules（加仓）
 
-Starter → Half: 浮盈 >5% + Trend Confirmed + 成交量确认
+Starter → Half: 浮盈 >5%（从建仓均价计算）+ Trend Confirmed + 成交量确认
 
-Half → Full: 浮盈 >10% + Catalyst 验证 Thesis
+Half → Full: 浮盈 >10%（从建仓均价计算）+ Catalyst 验证 Thesis
 
 永远：不加亏损仓位，不摊平成本。
 
@@ -100,11 +106,13 @@ Half → Full: 浮盈 >10% + Catalyst 验证 Thesis
 
 ## Reduce Rules（减仓）
 
-跌破最近 HL，仓位降级处理：
+日线跌破最近 HL，仓位降级处理：
 
 - Full → Half
 - Half → Starter
 - Starter → 清仓
+
+如果日线 LH/LL 趋势已经形成，直接按 Exit Rule 清仓，不再逐级。
 
 ---
 
@@ -140,11 +148,7 @@ Half → Full: 浮盈 >10% + Catalyst 验证 Thesis
 
 ### Trend Exit
 
-LH/LL 形成时退出。
-
-### Risk Exit
-
-跌破 2ATR。
+日线 LH/LL 形成时退出。
 
 ---
 
@@ -221,6 +225,8 @@ No "to reduce cost."
 
 Doing T generated emotional stress, sleep disruption, and repeated rule violations. Therefore, it is permanently banned.
 
+永久禁止买入 3x 杠杆 ETF（做多/做空），包括 TQQQ/SQQQ/SOXL/SOXS 等。时间衰减 + 波动拖累 + 情绪陷阱，长期持有几乎注定亏损。
+
 Futu = 中线趋势交易。
 - 所有买卖决定在盘前/盘后做，盘中不操作
 - 可以提前设置移动止损线，但不看盘
@@ -234,10 +240,44 @@ Futu = 中线趋势交易。
 每笔交易必须回答以下 8 个问题，缺一不可：
 
 1. **为什么买？**
+   - Thesis 驱动（行业逻辑 + 公司质量）
+   - 技术信号（纯趋势突破）
+   - 催化剂驱动（财报/产品发布/政策）
+   - ⚠️ 如果答不出来 → 不买
+
 2. **为什么现在买？**
+   - 日线刚形成 HH/HL，趋势确认
+   - 回调到支撑位，放量企稳
+   - 催化剂即将到来（<30 天）
+   - 突破关键阻力位 + 放量
+   - ⚠️ "因为跌了很多" / "感觉要涨了" → 不是理由
+
 3. **Thesis 是什么？**
+   - 用一句话说清楚核心逻辑
+   - 例："AMD 是唯一能挑战 NVDA 的 AI GPU 厂商，MI450 量产 + 大客户合作验证"
+   - ⚠️ 如果需要超过两句话才能解释 → thesis 不够清晰
+
 4. **Trend 是否确认？**
+   - ✅ 周线 Bullish + 日线 HH/HL
+   - ⚠️ 周线 Bullish 但日线未确认 → 等待
+   - ❌ 周线未确认 → 不入场
+
 5. **什么时候认错？**
+   - 写出具体价格或条件（"跌破 $XXX" / "浮亏 X%"）
+   - 不接受模糊回答（"看情况" / "再观察"）
+   - ⚠️ 如果写不出来 → 不买
+
 6. **当前情绪？**
-7. **属于哪个系统？**（Thesis + Trend / Pure Trend）
+   - 😐 平静 / 客观 → 可以交易
+   - 😰 焦虑 / 恐惧 / 想回本 → 停止，48 小时后再看
+   - 🤩 兴奋 / FOMO / "一定会涨" → 停止，冷静后再评估
+   - 😤 不甘心 / 报复心理 → 关闭交易软件
+
+7. **属于哪个系统？**
+   - Thesis + Trend（主系统：行业逻辑 + 趋势确认）
+   - Pure Trend（纯技术：只看价格和成交量）
+   - ⚠️ "两个都有点" → 不清晰，重新想
+
 8. **如果今天不能交易，我明天还愿意持有吗？**
+   - ✅ 是 → 可以买
+   - ❌ 否 → 这是短线冲动，不是中线交易
