@@ -1,5 +1,5 @@
 ---
-date: 2026-07-24T10:00:00+08:00
+date: 2026-07-27T10:00:00+08:00
 tags: ["选股", "AI Compute", "Cyber", "Workflow", "Robotics"]
 title: "Watchlist"
 weight: 2

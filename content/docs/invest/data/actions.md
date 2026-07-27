@@ -1,5 +1,5 @@
 ---
-date: 2026-07-24T10:00:00+08:00
+date: 2026-07-27T10:00:00+08:00
 tags: ["待办", "执行计划"]
 title: "Actions"
 weight: 4
@@ -27,7 +27,7 @@ weight: 4
 - [x] Jul 10: 跑 /earnings-preview TSLA（已完成，报告在 reports/earnings/）
 - [ ] Jul 21-23: 跑 /earnings-preview GOOGL（已清仓，跳过）
 - [ ] Jul 22-24: 跑 /earnings-preview META
-- [ ] Jul 28-30: 跑 /earnings-preview AMD
+- [x] Jul 28-30: 跑 /earnings-preview AMD（已完成）
 - [ ] Jul底: 跑 /earnings-preview DDOG
 - [ ] Aug初: 跑 /earnings-preview PANW
 
