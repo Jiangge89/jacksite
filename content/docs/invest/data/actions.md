@@ -1,7 +1,5 @@
 ---
-date: 2026-07-27T10:00:00+08:00
-tags: ["待办", "执行计划"]
-title: "Actions"
+title: Actions
 weight: 4
 ---
 
@@ -27,14 +25,37 @@ weight: 4
 - [x] Jul 10: 跑 /earnings-preview TSLA（已完成，报告在 reports/earnings/）
 - [ ] Jul 21-23: 跑 /earnings-preview GOOGL（已清仓，跳过）
 - [ ] Jul 22-24: 跑 /earnings-preview META
-- [x] Jul 28-30: 跑 /earnings-preview AMD（已完成）
+- [ ] Jul 28-30: 跑 /earnings-preview AMD
 - [ ] Jul底: 跑 /earnings-preview DDOG
 - [ ] Aug初: 跑 /earnings-preview PANW
+
+## 本周 (Jul 28-Aug 1)
+
+- [x] AMD: 卖出 20 股 @ $544（25→5 股，Starter ~2%）。Jul 29 执行
+- [x] NVDA: 清仓 30 股 @ $195.3。Jul 29 执行。亏损 ~$561
+- [x] NOW: 加仓 20 股 @ $109.8（40→60 股，Half ~5%）。Jul 29 执行
+- [x] DDOG: 减 10 股（60→50）@ $253。Jul 29 盘前成交。回笼 $2,530
+- [ ] FOMC 决定（Jul 29 2pm ET）+ MSFT/META 财报（Jul 29 盘后）→ 观察，不操作
+- [ ] AAPL/AMZN 财报（Jul 30 盘后）→ 观察
+
+## 下周 (Aug 3-7) — FOMC + 四大财报后
+
+- [ ] 评估 SNOW 建仓 Starter（等趋势确认 + 跑 Trade Checklist 8 题）
+- [ ] 评估 CRM 建仓 Starter（等趋势确认 + 跑 Trade Checklist 8 题）
+- [ ] SNOW 和 CRM 都属 Workflow/Cloud，加上 DDOG + NOW = 板块已有 2 只，最多再加 1 只（3 只上限）
+- [ ] AMD 财报 Aug 4 盘后。根据减仓后仓位决定持有/继续减
+- [ ] DDOG 财报 Aug 6。减仓到 50 股后评估
+
+## 观察清单
+
+- [ ] NOW: 破 $112 → 加仓到 Half。当前均价 $100.05，$112 = 浮盈 +12%，满足 >5% 加仓条件
+- [ ] PLTR: 目标建仓区间 $110-120（Fwd P/E ~70x），当前 $131.5，未到
+- [ ] RDDT / VEEV: 先放 watchlist 观察，不急于建仓
 
 ## 持续关注
 
 - [ ] 每周一更新 portfolio.md 的 Total Equity
 - [ ] PANW 减仓后~10%，财报前已合规
-- [ ] DDOG 观察加仓机会（Workflow板块强势时）
-- [ ] ABAT 减仓计划：$4-5 卖 2,000 股 → $5+ 卖 2,000 股 → 保留 1,000 股。之后最高持仓不超过 2,000 股。⚠️ 跌破 $2.40 也执行减仓
+- [ ] ABAT 减仓计划：$4-5 卖 2,000 股 → $5+ 卖 2,000 股 → 保留 1,000 股。⚠️ 跌破 $2.40 也执行减仓
 - [ ] ZS：已减仓过，当前 -38% 不再继续减仓，持有观察
+- [ ] ABAT / BA / NVAX / CCXI：消息面投机股，非 thesis 驱动，注意区分核心仓位和投机仓位
