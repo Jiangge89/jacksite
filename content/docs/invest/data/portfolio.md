@@ -11,7 +11,7 @@ Updated: 2026-07-29
 
 Total Equity: $128,265 (Jun 底 $139,907, 本月 -8.3%)
 
-Cash: $46,317 (36%)
+Cash: $43,999 (34%)
 
 Maximum Position: 10%
 
@@ -21,17 +21,17 @@ Sector Cap: 25%
 
 | Ticker | Shares | Avg Cost | Price | Value | % of Equity | Sector | Status |
 |--------|--------|----------|-------|-------|-------------|--------|--------|
-| DDOG | 50 | 244.14 | 253.00 | 12,650 | 9.9% | Workflow | Full ✅ 已减仓 |
+| DDOG | 50 | 244.14 | 253.00 | 12,650 | 9.9% | Cloud/Observability | Full ✅ 已减仓 |
 | PANW | 40 | 244.57 | 320.00 | 12,800 | 10.0% | Cyber | Full |
 | BA | 50 | 86.55 | 221.40 | 11,070 | 8.6% | Aerospace | Half+ |
 | MSFT | 20 | 410.58 | 394.21 | 7,884 | 6.1% | Cloud | Half |
 | NVAX | 1,000 | 8.27 | 7.37 | 7,370 | 5.7% | Biotech | Half |
-| NOW | 60 | 103.28 | 109.84 | 6,590 | 5.1% | Workflow | Half |
+| NOW | 80 | 106.44 | 115.90 | 9,272 | 7.2% | Workflow | Half+ (第二批 30 股待加) |
 | ABAT | 3,000 | -0.17 | 2.18 | 6,540 | 5.1% | Battery | 零成本 |
-| ZS | 30 | 202.64 | 152.00 | 4,560 | 3.6% | Cyber | ⛔ 浮亏 -25% |
-| TSLA | 10 | 427.85 | 306.00 | 3,060 | 2.4% | Robotics | ⛔ 浮亏 -28.5% |
+| ZS | 30 | 202.64 | 152.00 | 4,560 | 3.6% | Cyber | ⛔ 浮亏 -25%，触发 20% 清仓线 |
+| TSLA | 10 | 427.85 | 306.00 | 3,060 | 2.4% | Robotics | ⛔ 浮亏 -28.5%，触发 20% 清仓线 |
 | CCXI | 200 | 15.37 | 14.55 | 2,910 | 2.3% | Robotics | 梦想仓 |
-| OUST | 80 | 46.94 | 33.84 | 2,707 | 2.1% | Robotics | ⛔ 浮亏 -27.9% |
+| OUST | 80 | 46.94 | 33.84 | 2,707 | 2.1% | Robotics | ⛔ 浮亏 -27.9%，触发 20% 清仓线 |
 | AMD | 5 | -696.68 | 455.65 | 2,278 | 1.8% | AI Compute | Starter（零成本） |
 | GTTCW | 24 | 4.82 | — | — | ~0.0% | Other | Warrant |
 
@@ -48,9 +48,9 @@ Sector Cap: 25%
 
 | Sector | Tickers | Combined % | Cap (25%) | Status |
 |--------|---------|------------|-----------|--------|
-| Workflow | DDOG + NOW | 15.0% | 25% | ✅ |
+| Workflow | NOW | 5.1% | 25% | ✅ |
+| Cloud/Observability | DDOG + MSFT | 16.0% | 25% | ✅ |
 | Cyber | PANW + ZS | 13.6% | 25% | ✅ |
-| Cloud | MSFT | 6.1% | 25% | OK |
 | Robotics | TSLA + OUST + CCXI | 6.8% | 25% | OK |
 | AI Compute | AMD | 1.8% | 25% | ✅ 大幅减仓完成 |
 | Other | BA + NVAX + ABAT | 19.4% | — | 非核心/投机 |
@@ -73,9 +73,9 @@ Sector Cap: 25%
 
 ## Risk Flags
 
-1. ⛔ ZS -25%、OUST -28%、TSLA -29%：均超 20% 清仓线，仓位 ≤5% 评估后持有
-2. DDOG 减仓完成（60→50），9.9% 回到 Full 以内
-3. NVAX -10.9%，接近冻结加仓线
-4. Cash 36%（$46,317）— 弹药充足
-5. 本月回撤 -8.3%，超过单月 -5% 预警线
+1. ⛔ **ZS -25%、OUST -28%、TSLA -29%：三只股票均超过 20% 清仓线。** 规则写的是"浮亏 >20%: 清仓（保险丝）"，无例外。TSLA 此前已讨论过（2.4% 仓位，thesis 不变，决定持有），但 ZS 和 OUST 尚未正式处理
+2. DDOG 11.8% 超 Full，挂单卖 10 股中（成交后 ~9.9%）
+3. NVAX -10.9%，接近冻结加仓线（-10%），继续观察
+4. Cash 34%（$43,787）— 弹药充足
+5. 本月回撤 -8.3%，接近单月 -5% 预警线（fulltime-criteria）
 6. FOMC Jul 29 | MSFT/META 财报 Jul 29 | AAPL/AMZN 财报 Jul 30 | AMD 财报 Aug 4 | DDOG 财报 Aug 6

@@ -40,15 +40,18 @@ weight: 4
 
 ## 下周 (Aug 3-7) — FOMC + 四大财报后
 
-- [ ] 评估 SNOW 建仓 Starter（等趋势确认 + 跑 Trade Checklist 8 题）
-- [ ] 评估 CRM 建仓 Starter（等趋势确认 + 跑 Trade Checklist 8 题）
-- [ ] SNOW 和 CRM 都属 Workflow/Cloud，加上 DDOG + NOW = 板块已有 2 只，最多再加 1 只（3 只上限）
+- [ ] SNOW 建仓 Starter ~$2,565。Trade Checklist ✅ 已完成。等 AAPL/AMZN 结果 + 破前高后执行。Data 板块（0/3）
+- [ ] CRM 建仓 Starter ~$2,565。Trade Checklist ✅。等 AAPL/AMZN 结果后执行。Workflow 板块（NOW = 1/3）
+- [ ] VEEV 建仓 Starter ~$2,565。Trade Checklist ✅。等 AAPL/AMZN 结果后执行。垂直 AI / Healthcare IT 板块
+- [ ] 三只建仓后：持仓 12→15 只（触及上限），现金 $43,999→~$36,304（28%），不再新建仓位
+- [ ] SNOW 财报 ~Aug 26，CRM 财报 ~Sep 3，均不在 3 天禁区 ✅
 - [ ] AMD 财报 Aug 4 盘后。根据减仓后仓位决定持有/继续减
 - [ ] DDOG 财报 Aug 6。减仓到 50 股后评估
 
 ## 观察清单
 
-- [ ] NOW: 破 $112 → 加仓到 Half。当前均价 $100.05，$112 = 浮盈 +12%，满足 >5% 加仓条件
+- [x] NOW: 第一批加仓 20 股 @ $115.9（60→80 股，~7.2%）。Jul 30 执行
+- [ ] NOW: 第二批加仓 30 股（80→110，~10% Full）。等趋势继续确认后执行
 - [ ] PLTR: 目标建仓区间 $110-120（Fwd P/E ~70x），当前 $131.5，未到
 - [ ] RDDT / VEEV: 先放 watchlist 观察，不急于建仓
 
