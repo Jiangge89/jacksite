@@ -5,13 +5,13 @@ weight: 1
 
 # Portfolio
 
-Updated: 2026-07-29
+Updated: 2026-07-31
 
 ## Account Summary
 
 Total Equity: $128,265 (Jun 底 $139,907, 本月 -8.3%)
 
-Cash: $43,999 (34%)
+Cash: $34,947 (估算，待周一更新)
 
 Maximum Position: 10%
 
@@ -26,13 +26,15 @@ Sector Cap: 25%
 | BA | 50 | 86.55 | 221.40 | 11,070 | 8.6% | Aerospace | Half+ |
 | MSFT | 20 | 410.58 | 394.21 | 7,884 | 6.1% | Cloud | Half |
 | NVAX | 1,000 | 8.27 | 7.37 | 7,370 | 5.7% | Biotech | Half |
-| NOW | 80 | 106.44 | 115.90 | 9,272 | 7.2% | Workflow | Half+ (第二批 30 股待加) |
+| NOW | 100 | 106.77 | ~108.08 | ~10,808 | ~8.2% | Workflow | Half+（第三批 10 股待加到 Full） |
 | ABAT | 3,000 | -0.17 | 2.18 | 6,540 | 5.1% | Battery | 零成本 |
 | ZS | 30 | 202.64 | 152.00 | 4,560 | 3.6% | Cyber | ⛔ 浮亏 -25%，触发 20% 清仓线 |
 | TSLA | 10 | 427.85 | 306.00 | 3,060 | 2.4% | Robotics | ⛔ 浮亏 -28.5%，触发 20% 清仓线 |
 | CCXI | 200 | 15.37 | 14.55 | 2,910 | 2.3% | Robotics | 梦想仓 |
 | OUST | 80 | 46.94 | 33.84 | 2,707 | 2.1% | Robotics | ⛔ 浮亏 -27.9%，触发 20% 清仓线 |
-| AMD | 5 | -696.68 | 455.65 | 2,278 | 1.8% | AI Compute | Starter（零成本） |
+| AMD | 5 | -696.68 | ~484 | ~2,420 | ~1.8% | AI Compute | Starter（零成本） |
+| CRM | 15 | 187.73 | ~187.73 | ~2,816 | ~2.1% | Workflow | Starter（新建仓 Jul 31） |
+| VEEV | 20 | 203.72 | ~198.44 | ~3,969 | ~3.0% | 垂直 AI / Healthcare IT | Starter（⚠️ 超 2%） |
 | GTTCW | 24 | 4.82 | — | — | ~0.0% | Other | Warrant |
 
 ## 已清仓
@@ -48,7 +50,8 @@ Sector Cap: 25%
 
 | Sector | Tickers | Combined % | Cap (25%) | Status |
 |--------|---------|------------|-----------|--------|
-| Workflow | NOW | 5.1% | 25% | ✅ |
+| Workflow | NOW + CRM | ~10.3% | 25% | ✅ |
+| 垂直 AI / Healthcare IT | VEEV | ~3.0% | 25% | ✅ |
 | Cloud/Observability | DDOG + MSFT | 16.0% | 25% | ✅ |
 | Cyber | PANW + ZS | 13.6% | 25% | ✅ |
 | Robotics | TSLA + OUST + CCXI | 6.8% | 25% | OK |
