@@ -36,7 +36,7 @@ weight: 2
 | Ticker | Theme | Wave | 当前估值 | 观察理由 | 建仓条件 |
 |--------|-------|------|---------|---------|---------|
 | AVGO | AI Networking + ASIC + VMware | Wave 1 | ~$378, Fwd P/E 27x, 52 周高 $495（-24%） | 三引擎：定制 ASIC（+140%）+ AI 网络（Tomahawk 独占 800G/1.6T）+ VMware（78% 毛利率）。AI 芯片营收 Q2 $10.8B（+143%），FY27 目标 >$100B。$73B 积压订单。6/4 财报后跌 15%（Q3 AI 指引略低于预期 + 毛利率从 77%→74%），估值消化中 | 方案 A：$340-350 区间（Fwd P/E ~24x）建 Starter 2%。方案 B：当前价位等 HH/HL + 放量趋势确认后 Starter 2% |
-| PLTR | Data + Workflow + AI | Wave 2 | ~$134, P/E 140x(TTM), Fwd P/E ~83x | AIP 平台强，政府+企业双线。从 ATH $207 已跌 35%。Rev +71% YoY，利润率 44% | 趋势确认 + 回调至 $110-120（Fwd P/E ~70x），Starter 2% |
+| PLTR | Data + Workflow + AI | Wave 2 | ~$135, Fwd P/E ~85x | Q2 beat: Rev $1.94B (+93%), EPS $0.41 beat 17%, US Commercial +149%, Rule of 40 155%。FY26 指引上调至 $8.15B (+82%)。PEG ~1.0x | 趋势确认 + $130-140 区间建 Starter 2%。Thesis 止损：季度增速 <40% 且指引不上调 |
 | CDNS | AI 芯片设计 EDA | Wave 1-2 | 待查 | EDA 双寡头之一，芯片复杂度越高越受益。周期性低，护城河深 | 趋势确认 + 回调，Starter 2% |
 | ISRG | AI + 医疗机器人 | Wave 3 | 待查 | 达芬奇装机量 = 长期耗材收入。Wave 3 最确定的标的 | 回调到支撑位，Starter 2% |
 
