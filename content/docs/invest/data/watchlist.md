@@ -1,5 +1,5 @@
 ---
-title: Watchlist
+title: "Watchlist"
 weight: 2
 ---
 

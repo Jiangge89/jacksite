@@ -1,6 +1,4 @@
 ---
-date: 2026-07-23T20:00:00+08:00
-tags: ["财报", "META", "Cloud", "AI Infrastructure"]
 title: "META Earnings Preview 2026-07-23"
 weight: 20260723
 ---

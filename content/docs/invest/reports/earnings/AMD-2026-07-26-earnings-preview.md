@@ -1,6 +1,4 @@
 ---
-date: 2026-07-26T10:00:00+08:00
-tags: ["财报预览", "AMD", "AI Compute"]
 title: "AMD Earnings Preview 2026-07-26"
 weight: 20260726
 ---
@@ -135,6 +133,8 @@ AMD 在我的投资系统中属于 **AI Compute 核心持仓**。它是唯一能
 | 成交量 | 周一放量涨 → 后续缩量跌。典型的"利好出货"形态 |
 | 形态判断 | **短期分配/回调中**。不是趋势破坏，但需要支撑确认 |
 
+**技术面总结：** 短期趋势偏弱，"买预期卖事实"仍在消化中。$500 是关键支撑——如果 FOMC 前守住 $500，财报前形态尚可。如果跌破 $500，财报前情绪会更悲观。
+
 ---
 
 ## 8. Risk / Reward Setup
@@ -148,6 +148,14 @@ AMD 在我的投资系统中属于 **AI Compute 核心持仓**。它是唯一能
 | 上行回报 | ~$48-78（+9% to +15%） |
 | RR 比率 | ~1:1 到 1:1.5 |
 | 置信度 | **中等** |
+
+**置信度分析：**
+- Thesis 强度：✅ 强（MI450 + 大客户合作 + EPYC 份额增长）
+- 趋势确认：⚠️ 短期弱（大会后连跌）
+- 板块强度：⚠️ 弱（芯片板块整体回调）
+- 财报不确定性：⚠️ 高（EPS 预期分散 + Polymarket 看 miss）
+
+RR 不够理想（不到 2:1），主要因为股价 YTD +160% 后上行空间被压缩，而短期下行风险因板块走弱而放大。
 
 ---
 
@@ -166,14 +174,53 @@ AMD 在我的投资系统中属于 **AI Compute 核心持仓**。它是唯一能
 ### 策略选项
 
 1. **持有不动（首选）**
-2. **财报前小幅减仓（2-3 股）**——如 FOMC 后板块继续走弱
-3. **财报后根据反应加仓/减仓**——最符合系统的策略
+   - 仓位 ~10.1% 刚好在 Full 线，不需要强制减仓
+   - 零成本持仓，即使 -15% gap down（$443）仍然是巨额盈利
+   - 情绪压力低，可以安心持有
+   - **风险：** 如果暴跌 15%，仓位从 10.1% 变成 ~8.6%，自然减仓效果
+
+2. **财报前小幅减仓（2-3 股）**
+   - 将仓位从 10.1% 降至 ~8-9%，给出安全边际
+   - 如果 beat 可以在确认后加回
+   - **适用条件：** 如果 FOMC 后板块继续走弱，或你感到情绪不安
+
+3. **财报后根据反应加仓/减仓**
+   - Beat + gap up + 趋势确认 → 可能不需要操作（已在 Full）
+   - Miss + gap down → 评估 thesis 是否变化，决定是否减仓
+   - **这是最符合系统的策略**
+
+4. **不建议**
+   - ❌ 财报前加仓（已在 Full 线，且趋势未确认）
+   - ❌ 财报前清仓（thesis 强，零成本持仓，无需恐慌）
 
 ---
 
 ## 10. Options Strategy Framework
 
+> 本节仅供学习和场景规划，不构成交易建议。
+
+### Long Call
+- **适用场景：** 强烈看多 Q2 beat + Q3 指引大幅上调
+- **主要风险：** IV 已处 12 个月高位，期权溢价昂贵。即使方向正确，IV crush 可能吃掉大部分利润
+- **需要的数据：** 当前 IV percentile、ATM call 价格、隐含波动 vs 历史实现波动
+- **评估：** ⚠️ 不推荐。IV 太高，RR 不佳。如果要做多，不如在正股上操作
+
+### Long Put
+- **适用场景：** 对冲已有 25 股持仓的下行风险
+- **主要风险：** 如果 beat 并大涨，put 归零
+- **需要的数据：** OTM put 价格（如 $480-500 strike）、到期日
+- **评估：** 可以考虑小额对冲，但零成本持仓的下行风险已经很低。对冲成本可能不值得
+
+### Long Straddle / Strangle
+- **适用场景：** 认为实际波动会超过隐含波动（历史平均 7.2%，但近两次分别 +18.6% 和 -17.3%）
+- **主要风险：** IV 高位买入，需要超大波动才能盈利
+- **评估：** 有一定逻辑（近期财报波动确实远超平均），但 IV 太高，成本高
+
+### 总结
+
 当前 IV 处于高位，期权不具备好的 RR。**最优策略是在正股层面管理风险**（持有或小幅减仓），而非通过期权。
+
+⚠️ 提醒：期权是杠杆工具，会放大亏损。任何期权交易必须遵守仓位规则（期权总敞口不超过 5%）。
 
 ---
 
@@ -182,9 +229,44 @@ AMD 在我的投资系统中属于 **AI Compute 核心持仓**。它是唯一能
 | 检查项 | 状态 | 结论 |
 |--------|------|------|
 | 当前仓位 | 25 股，~10.1% | ✅ 刚好 Full 线 |
-| 板块敞口 | AI Compute ~14.9% | ✅ 低于 25% cap |
-| 如果 gap down -15% | ~$11,075，~8.6% | ✅ 可接受 |
-| 能否安心睡觉？ | ✅ | 零成本持仓 |
+| 最大允许仓位 | 15% Hard cap | ✅ 远低于上限 |
+| 板块敞口 | AI Compute（AMD + NVDA）~14.9% | ✅ 低于 25% cap |
+| 如果 gap down -10%（$470） | ~$11,750，~9.1% | ✅ 可接受 |
+| 如果 gap down -15%（$443） | ~$11,075，~8.6% | ✅ 可接受（零成本仓，无心理压力） |
+| 能否安心睡觉？ | ✅ 是 | 零成本持仓，即使大跌仍然是巨额利润 |
+| 期权交易风险 | N/A | 未计划期权操作 |
+
+**仓位结论：** 当前 10.1% 在 Full 线，仓位管理合规。零成本持仓是最大的心理护城河——无论涨跌，不存在"亏钱"的压力。可以安心持有过财报。
+
+---
+
+## 12. Emotion Check Before Earnings
+
+请回答以下问题：
+
+- **是否想通过 AMD 财报弥补近期损失？**
+  - （注意：Jul 24 做 T 亏损 $1,300，TSLA -25%，可能有想"赚回来"的冲动）
+  _____
+
+- **是否害怕错过大涨行情？**
+  - （Q1 财报后 +18.6%，是否有"这次也会涨"的期待？）
+  _____
+
+- **是否因为股票最近表现好而过度自信？**
+  - （YTD +160%，零成本持仓，是否觉得"AMD 不可能出问题"？）
+  _____
+
+- **是否锚定在之前的高价？**
+  - （Jul 7 卖过 $568，是否觉得"一定会回到那里"？）
+  _____
+
+- **如果 AMD 财报后 gap down -15%（到 $443），你还能冷静思考吗？**
+  - （这意味着利润从 ~$13K 减少到 ~$11K，仍然是巨额盈利）
+  _____
+
+### 情绪风险评估
+
+AMD 的情绪风险相对**低**：零成本持仓消除了亏损恐惧，仓位刚好 Full 线无需紧急操作。主要风险是**过度自信**（YTD +160% + 零成本 → 觉得不会出问题）和**锚定效应**（$568 高点 → 期待回到那里）。
 
 ---
 
@@ -194,15 +276,17 @@ AMD 在我的投资系统中属于 **AI Compute 核心持仓**。它是唯一能
 
 - **Ticker:** AMD
 - **Earnings Date:** Aug 4, 2026（盘后）
-- **Current Thesis:** AI GPU 挑战者，MI450 + Helios 量产。大客户合作验证
-- **Market Expectation:** 营收 ~$11.2-11.3B，预期偏高
-- **Key Metrics:** Data Center 营收、Q3 指引、MI450 出货进展
-- **Bull Case:** DC >$7B + Q3 >$12.5B → +10-15%
-- **Bear Case:** DC <$6.3B + MI450 延迟 → -10-15%
+- **Current Thesis:** AI GPU 挑战者，MI450 + Helios 开始 H2 2026 量产。大客户 OpenAI/Meta/Anthropic/MSFT 合作验证。EPYC CPU 持续夺取 Intel 份额
+- **Market Expectation:** 营收 ~$11.2-11.3B，EPS ~$1.34-1.61（分散）。期待 Q3 指引大幅上调（MI450 ramp）。预期偏高
+- **Key Metrics:** Data Center 营收（$6.5-7B+?）、Q3 指引、MI450 出货进展、毛利率
+- **Bull Case:** DC >$7B + Q3 >$12.5B + MI450 加速 → +10-15%
+- **Bear Case:** DC <$6.3B + MI450 延迟 + 保守指引 → -10-15%
 - **Current Position:** 25 股，~10.1%（零成本）
-- **Planned Action:** 持有。FOMC 鹰派则减 5 股至 ~8%
-- **Invalidation:** MI450 严重延迟；DC 增速 <30%
-- **Emotion Risk:** 低
+- **Max Position:** 15% Hard cap
+- **Planned Action:** 持有。如 FOMC 后板块继续恶化，考虑减 2-3 股至 ~8-9%
+- **Invalidation:** MI450 量产严重延迟（>2 季度）；Data Center 增速 <30%；NVDA 份额反弹至 85%+
+- **Emotion Risk:** 低。零成本 + Full 线仓位。主要警惕过度自信和锚定
+- **Followed Rules?:** 待财报后填写
 
 ---
 
@@ -210,15 +294,61 @@ AMD 在我的投资系统中属于 **AI Compute 核心持仓**。它是唯一能
 
 ### Post-Earnings Review（Aug 4 财报后填写）
 
-- **Actual Result:** _____
-- **Market Reaction:** _____
+- **Actual Result:**
+  - Revenue: _____ vs $11.2-11.3B expected
+  - EPS: _____ vs $1.34-1.61 expected
+  - Data Center: _____ vs $6.5-7B expected
+  - Q3 Guidance: _____ vs $12B+ expected
+
+- **Market Reaction:** _____ % (盘后 / 次日)
+
 - **Which key metric mattered most?** _____
+
 - **Was my pre-earnings thesis correct?** _____
+
+- **Did price action confirm or reject the thesis?** _____
+
 - **Did I follow my sizing rule?** _____
+
 - **Did I follow my emotion rule?** _____
-- **What should be updated?** _____
+
+- **What should be updated in Watchlist?**
+  - Trend: _____
+  - Key Level: _____
+  - Thesis: _____
+  - Action Bias: _____
+
+- **What should be updated in Trading Rules?** _____
 
 ---
+
+## 15. Summary & Action Items
+
+### 财报前行动清单
+
+| 日期 | 行动 |
+|------|------|
+| Jul 28-29 | 观察 FOMC 结果。如果鹰派 + 芯片板块继续跌，评估是否减 2-3 股 |
+| Jul 29 | 观察 META/MSFT 财报。capex 指引影响 AMD 上游需求叙事 |
+| Jul 30 - Aug 1 | 确认最终策略。如果 $500 支撑守住 + 板块企稳，持有不动 |
+| Aug 4 | 财报日。盘中不操作。盘后看结果，次日评估 |
+| Aug 5 | 填写 Post-Earnings Review。根据反应决定下一步 |
+
+### 核心判断
+
+**AMD 是一个 thesis 强、仓位合规、情绪压力低的财报事件。** 零成本持仓是最大优势——它允许你用"投资者"而非"赌徒"的心态来面对财报。不需要恐慌操作，也不需要贪婪加仓。**最优策略：持有，观察，根据结果调整。**
+
+---
+
+*Sources:*
+- [AMD Q2 2026 Earnings Preview](https://finance.yahoo.com/markets/stocks/articles/heres-expect-advanced-micro-devices-152825306.html)
+- [AMD Press Release: Q2 Earnings Date](https://www.amd.com/en/newsroom/press-releases/2026-7-8-amd-to-report-fiscal-second-quarter-2026-financial.html)
+- [AMD Q1 2026 Earnings Results](https://finance.yahoo.com/markets/stocks/articles/amd-q1-2026-earnings-revenue-203331768.html)
+- [AMD Q1 Data Center Revenue](https://www.datacenterdynamics.com/en/news/amd-posts-q1-2026-data-center-revenue-of-58bn-forecasts-120bn-server-cpu-income-by-2030/)
+- [AMD Analyst Price Targets](https://finance.yahoo.com/markets/stocks/articles/amd-stock-160-2026-analysts-141502071.html)
+- [AMD Advancing AI 2026 Announcements](https://www.globenewswire.com/news-release/2026/07/23/3332491/0/en/AAI-2026-AMD-Delivers-Full-Stack-Compute-for-the-Agentic-AI-Era.html)
+- [AMD Options Implied Move](https://www.barchart.com/story/news/33856947/should-you-buy-amd-stock-ahead-of-q2-earnings-on-august-5)
+- [AMD Stock Forecast](https://capital.com/en-int/market-updates/amd-stock-forecast-23-06-2026)
 
 *Report generated: 2026-07-26*
 *Framework: Industry Driven, Trend Confirmed, Position Sized, Emotion Controlled*

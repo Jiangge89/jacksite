@@ -1,6 +1,4 @@
 ---
-date: 2026-07-10T20:00:00+08:00
-tags: ["财报", "TSLA", "Robotics"]
 title: "TSLA Earnings Preview 2026-07-10"
 weight: 20260710
 ---

@@ -1,5 +1,5 @@
 ---
-title: Actions
+title: "Actions"
 weight: 4
 ---
 
@@ -60,6 +60,16 @@ weight: 4
 - [ ] PLTR: 计划建仓 Starter 2%。清仓 ZS 腾出名额。目标区间 $130-140（上调自 $110-120，Q2 财报超 Bull Case）。Thesis 止损：季度增速 <40% 且指引不上调。等趋势确认再执行
 - [ ] ZS: 清仓（配合 PLTR 建仓）。当前 40 股 @ $154.74，亏损 -23.6%（~$1,916）
 - [ ] RDDT / VEEV: 先放 watchlist 观察，不急于建仓
+
+## 下周一 (Aug 10)
+
+- [ ] TEAM 建仓 Starter 2-3%：~20-25 shares @ ~$113（~$2,260-$2,825）。Workflow 板块。Fwd P/E 14-18x，P/S 3.7x，估值洼地。AI 增强型（Rovo）。回调 10% 到 ~$102 加到 Half
+- [ ] VEEV 加仓 Starter→Half 5%：加 15 shares @ ~$230（~$3,450）。15→30 股
+- [ ] SNOW 加仓 Starter→Half 5%：加 11 shares @ ~$330（~$3,630）。10→21 股
+- [ ] DDOG 减仓 Half→Starter：卖 20 shares（30→10 股）。Thesis 弱化，定价权侵蚀
+
+预计用资：~$9,535（TEAM + VEEV + SNOW）- ~$4,720（DDOG 卖出）= 净用资 ~$4,815
+Cash 变化：$31,007 → ~$26,192（~19%）
 
 ## 持续关注
 
