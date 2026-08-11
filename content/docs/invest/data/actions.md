@@ -1,5 +1,5 @@
 ---
-title: "Actions"
+title: Actions
 weight: 4
 ---
 
@@ -63,13 +63,11 @@ weight: 4
 
 ## 下周一 (Aug 10)
 
-- [ ] TEAM 建仓 Starter 2-3%：~20-25 shares @ ~$113（~$2,260-$2,825）。Workflow 板块。Fwd P/E 14-18x，P/S 3.7x，估值洼地。AI 增强型（Rovo）。回调 10% 到 ~$102 加到 Half
-- [ ] VEEV 加仓 Starter→Half 5%：加 15 shares @ ~$230（~$3,450）。15→30 股
-- [ ] SNOW 加仓 Starter→Half 5%：加 11 shares @ ~$330（~$3,630）。10→21 股
-- [ ] DDOG 减仓 Half→Starter：卖 20 shares（30→10 股）。Thesis 弱化，定价权侵蚀
-
-预计用资：~$9,535（TEAM + VEEV + SNOW）- ~$4,720（DDOG 卖出）= 净用资 ~$4,815
-Cash 变化：$31,007 → ~$26,192（~19%）
+- [x] TEAM 盘前建仓 Starter 2-3%：20 shares @ $149.50（$2,990）。Workflow 板块
+- [x] MNDY 盘前建仓 Starter：50 shares @ $94.67（$4,734）。Workflow 板块。Q2 财报 BMO ⚠️ 赌财报
+- [ ] VEEV 加仓 Starter→Half 5%：加 15 shares @ ~$230（~$3,450）。15→30 股。未执行
+- [x] SNOW 加仓 Starter→Half 5%：加 10 shares @ $334.40（$3,344）。10→20 股
+- [x] DDOG 清仓：卖 30 shares @ $234（$7,020）。Thesis 弱化
 
 ## 持续关注
 
@@ -78,3 +76,4 @@ Cash 变化：$31,007 → ~$26,192（~19%）
 - [ ] ABAT 减仓计划：$4-5 卖 2,000 股 → $5+ 卖 2,000 股 → 保留 1,000 股。⚠️ 跌破 $2.40 也执行减仓
 - [ ] ZS：已减仓过，当前 -38% 不再继续减仓，持有观察
 - [ ] ABAT / BA / NVAX / CCXI：消息面投机股，非 thesis 驱动，注意区分核心仓位和投机仓位
+- [ ] DDOG：Thesis 修正后放回 watchlist。入场条件：CPI 后回调至 $240-245 建 Starter 2%。不追 $260+

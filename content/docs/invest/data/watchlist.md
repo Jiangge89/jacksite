@@ -1,5 +1,5 @@
 ---
-title: "Watchlist"
+title: Watchlist
 weight: 2
 ---
 
@@ -11,7 +11,7 @@ weight: 2
 |--------|-------|------------|-------|-----------------|-------|
 | AMD | AI Compute | High | ~$529, 回调中 | 25 (10.4%) | Jul 24 减 5 股 @ $549。大会利好落地（Helios/Anthropic 2GW/$5B），"买预期卖事实"。Aug 4 财报 |
 | PANW | Cyber | High | ~$324, 回调中 | 40 (~10%) | 从 $354 回落 -8.4%，跟随大盘非基本面驱动 |
-| DDOG | Workflow | High | ~$246, 回调中 | 60 (~11%) | 超 Full，Aug 6 财报前须减至 10%。Benchmark $330 目标价 |
+| DDOG | Cloud/Observability | High | $260.78, 财报后反弹 | 0（Aug 10 清仓） | Thesis 修正：定价权侵蚀在长尾客户成立，但核心大客户（91% ARR，58% 用 4+ 产品）平台锁定效应强，ToB 切换成本极高。重新观察中 |
 | OUST | Robotics Sensor | High | 反弹中, ~$48 | 80 (2.8%) | LiDAR。等趋势确认再加 |
 | TSLA | Robotics | High | ~$320, 财报暴跌 | 10 (2.4%) | Jul 22 财报 miss（EPS $0.33 vs $0.53），-14.5%。浮亏 -25% 但 thesis 不变，仓位可控，决定持有 |
 
@@ -39,6 +39,7 @@ weight: 2
 | PLTR | Data + Workflow + AI | Wave 2 | ~$135, Fwd P/E ~85x | Q2 beat: Rev $1.94B (+93%), EPS $0.41 beat 17%, US Commercial +149%, Rule of 40 155%。FY26 指引上调至 $8.15B (+82%)。PEG ~1.0x | 趋势确认 + $130-140 区间建 Starter 2%。Thesis 止损：季度增速 <40% 且指引不上调 |
 | CDNS | AI 芯片设计 EDA | Wave 1-2 | 待查 | EDA 双寡头之一，芯片复杂度越高越受益。周期性低，护城河深 | 趋势确认 + 回调，Starter 2% |
 | ISRG | AI + 医疗机器人 | Wave 3 | 待查 | 达芬奇装机量 = 长期耗材收入。Wave 3 最确定的标的 | 回调到支撑位，Starter 2% |
+| DDOG | Cloud/Observability | Wave 2 | $260.78, P/S ~23x, Fwd P/E ~55x | Thesis 修正：平台锁定（58% 用 4+ 产品，13% 用 10+）> 定价权侵蚀。ToB 切换成本极高，核心大客户（91% ARR）不会 DIY。Q2: Rev +36%加速, RPO +43%, FCF 25%。AI 客户 750+（含 Top 10 全部）| CPI 落地后回调至 $240-245（财报缺口支撑）建 Starter 2%。不追 $260+。Thesis 止损：大客户 NRR 下降 or $100K+ 客户增速放缓 |
 
 ---
 
