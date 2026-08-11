@@ -4,7 +4,30 @@ weight: 1
 bookCollapseSection: true
 ---
 
-## Pattern 1: HashMap
+## 20-Second Decision Tree
+
+```
+Lookup / Count / Pair       → HashMap
+Contiguous + condition      → Sliding Window
+Contiguous + sum/count      → Prefix Sum
+Two ends / sorted pair      → Two Pointers
+Sorted / monotonic          → Binary Search
+Top K / next min/max        → Heap
+Next greater/smaller        → Monotonic Stack
+Tree / components           → DFS
+Shortest unweighted path    → BFS
+Dependency ordering         → Topological Sort
+Dynamic connectivity        → Union Find
+Cycle / middle linked list  → Fast-Slow Pointers
+Overlap / meetings          → Intervals (Sort + Scan)
+All possibilities           → Backtracking
+Repeated optimal subproblem → DP
+LRU / custom data structure → HashMap + Doubly Linked List
+```
+
+---
+
+## Pattern 1: HashMap ⭐⭐⭐⭐⭐
 
 **When:** O(1) lookup, counting, grouping, finding pairs
 
@@ -28,7 +51,7 @@ for _, item := range items {
 
 ---
 
-## Pattern 2: Sliding Window
+## Pattern 2: Sliding Window ⭐⭐⭐⭐⭐
 
 **When:** Find min/max/count of a subarray/substring satisfying a condition
 
@@ -66,7 +89,110 @@ record maximum
 
 ---
 
-## Pattern 3: Binary Search
+## Pattern 3: Prefix Sum ⭐⭐⭐⭐⭐
+
+**When:** Range sum queries, cumulative calculations, "product except self"
+
+```go
+// Build
+prefix := make([]int, n+1)
+for i := 0; i < n; i++ {
+    prefix[i+1] = prefix[i] + nums[i]
+}
+
+// Query [left, right] in O(1)
+sum := prefix[right+1] - prefix[left]
+```
+
+**Prefix/Suffix variant:**
+
+```go
+// Left pass
+left[0] = base
+for i := 1; i < n; i++ {
+    left[i] = combine(left[i-1], nums[i-1])
+}
+
+// Right pass
+right[n-1] = base
+for i := n-2; i >= 0; i-- {
+    right[i] = combine(right[i+1], nums[i+1])
+}
+
+// Combine
+for i := 0; i < n; i++ {
+    result[i] = merge(left[i], right[i])
+}
+```
+
+**Problems:** [Range Sum Query](prefix-sums/), [Product of Array Except Self](product-of-array-except-self/), [Trapping Rain Water](trapping-rain-water/), [Count Divisors](count-divisors/)
+
+---
+
+## Pattern 4: Two Pointers ⭐⭐⭐⭐⭐
+
+**When:** Sorted array pair sum, opposite ends, remove duplicates, palindrome
+
+**Template — Opposite direction:**
+
+```go
+left, right := 0, len(nums)-1
+for left < right {
+    sum := nums[left] + nums[right]
+    if sum == target {
+        // found
+        left++
+        right--
+    } else if sum < target {
+        left++
+    } else {
+        right--
+    }
+}
+```
+
+**Template — 3Sum (sort + two pointers):**
+
+```go
+sort.Ints(nums)
+for i := 0; i < len(nums)-2; i++ {
+    if i > 0 && nums[i] == nums[i-1] { continue } // skip duplicates
+    left, right := i+1, len(nums)-1
+    for left < right {
+        sum := nums[i] + nums[left] + nums[right]
+        if sum == 0 {
+            result = append(result, []int{nums[i], nums[left], nums[right]})
+            for left < right && nums[left] == nums[left+1] { left++ }
+            for left < right && nums[right] == nums[right-1] { right-- }
+            left++
+            right--
+        } else if sum < 0 {
+            left++
+        } else {
+            right--
+        }
+    }
+}
+```
+
+**Template — Same direction (remove duplicates):**
+
+```go
+slow := 0
+for fast := 1; fast < len(nums); fast++ {
+    if nums[fast] != nums[slow] {
+        slow++
+        nums[slow] = nums[fast]
+    }
+}
+return slow + 1
+```
+
+**Problems:** [Container With Most Water](container-with-most-water/), [Trapping Rain Water](trapping-rain-water/), 3Sum, Remove Duplicates from Sorted Array
+
+---
+
+## Pattern 5: Binary Search ⭐⭐⭐⭐⭐
 
 **When:** Sorted data, O(log n) needed, "find boundary" problems
 
@@ -102,11 +228,26 @@ if nums[left] <= nums[mid] {  // left half sorted
 }
 ```
 
+**Search boundary / answer variant:**
+
+```go
+left, right := lo, hi
+for left < right {
+    mid := left + (right-left)/2
+    if canAchieve(mid) {
+        right = mid     // feasible → try smaller
+    } else {
+        left = mid + 1  // not feasible → go bigger
+    }
+}
+return left
+```
+
 **Problems:** [Binary Search](binary-search/), [Search in Rotated Sorted Array](search-in-rotated-sorted-array/)
 
 ---
 
-## Pattern 4: Heap
+## Pattern 6: Heap ⭐⭐⭐⭐⭐
 
 **When:** Kth largest/smallest, repeatedly extract min/max, priority-based processing
 
@@ -151,7 +292,46 @@ func (h *MinHeap) Pop() interface{} {
 
 ---
 
-## Pattern 5: DFS (Depth-First Search)
+## Pattern 7: Monotonic Stack ⭐⭐⭐⭐
+
+**When:** Next greater/smaller element, histogram areas, temperature problems
+
+```go
+stack := []int{} // stores indices
+for i := 0; i < len(nums); i++ {
+    for len(stack) > 0 && nums[stack[len(stack)-1]] < nums[i] {
+        idx := stack[len(stack)-1]
+        stack = stack[:len(stack)-1]
+        result[idx] = nums[i] // next greater element for idx
+    }
+    stack = append(stack, i)
+}
+```
+
+**Variant — Largest Rectangle in Histogram:**
+
+```go
+stack := []int{}
+maxArea := 0
+for i := 0; i <= len(heights); i++ {
+    h := 0
+    if i < len(heights) { h = heights[i] }
+    for len(stack) > 0 && heights[stack[len(stack)-1]] > h {
+        height := heights[stack[len(stack)-1]]
+        stack = stack[:len(stack)-1]
+        width := i
+        if len(stack) > 0 { width = i - stack[len(stack)-1] - 1 }
+        maxArea = max(maxArea, height*width)
+    }
+    stack = append(stack, i)
+}
+```
+
+**Problems:** Daily Temperatures, Next Greater Element, Largest Rectangle in Histogram
+
+---
+
+## Pattern 8: DFS (Depth-First Search) ⭐⭐⭐⭐⭐
 
 **When:** Explore all paths, connected components, trees, cycle detection
 
@@ -206,9 +386,9 @@ func dfs(root *TreeNode) *TreeNode {
 
 ---
 
-## Pattern 6: BFS (Breadth-First Search)
+## Pattern 9: BFS (Breadth-First Search) ⭐⭐⭐⭐⭐
 
-**When:** Shortest path, level-by-level traversal, nearest neighbor
+**When:** Shortest path in unweighted graph, level-by-level traversal
 
 ```go
 queue := []T{start}
@@ -240,11 +420,263 @@ for len(queue) > 0 {
 | Use when | Explore all paths, detect cycles | Shortest path, level order |
 | Space | O(depth) | O(width) |
 
-**Problems:** [Binary Tree Level Order Traversal](binary-tree-level-order-traversal/), [Number of Islands](number-of-islands/) (BFS variant)
+**Problems:** [Binary Tree Level Order Traversal](binary-tree-level-order-traversal/), [Number of Islands](number-of-islands/) (BFS variant), Word Ladder
 
 ---
 
-## Pattern 7: DP (1D Dynamic Programming)
+## Pattern 10: Topological Sort ⭐⭐⭐⭐⭐
+
+**When:** Dependency ordering, prerequisites, build order, course schedule
+
+**Template — Kahn's Algorithm (BFS):**
+
+```go
+indegree := make([]int, n)
+for u := 0; u < n; u++ {
+    for _, v := range graph[u] {
+        indegree[v]++
+    }
+}
+
+queue := []int{}
+for i := 0; i < n; i++ {
+    if indegree[i] == 0 {
+        queue = append(queue, i)
+    }
+}
+
+order := []int{}
+for len(queue) > 0 {
+    node := queue[0]
+    queue = queue[1:]
+    order = append(order, node)
+    for _, neighbor := range graph[node] {
+        indegree[neighbor]--
+        if indegree[neighbor] == 0 {
+            queue = append(queue, neighbor)
+        }
+    }
+}
+// len(order) < n → cycle exists
+```
+
+**Problems:** [Course Schedule](course-schedule/), Course Schedule II, Alien Dictionary
+
+---
+
+## Pattern 11: Union Find ⭐⭐⭐⭐
+
+**When:** Dynamic connectivity, merge components, "are A and B connected?"
+
+```go
+parent := make([]int, n)
+rank := make([]int, n)
+for i := range parent {
+    parent[i] = i
+}
+
+var find func(int) int
+find = func(x int) int {
+    if parent[x] != x {
+        parent[x] = find(parent[x]) // path compression
+    }
+    return parent[x]
+}
+
+union := func(x, y int) {
+    px, py := find(x), find(y)
+    if px == py { return }
+    if rank[px] < rank[py] { // union by rank
+        px, py = py, px
+    }
+    parent[py] = px
+    if rank[px] == rank[py] {
+        rank[px]++
+    }
+}
+```
+
+**When Union Find vs DFS/BFS:**
+
+| | Union Find | DFS/BFS |
+|---|-----------|---------|
+| Use when | Dynamic edges, online queries | Static graph, one-time traversal |
+| Strength | Merge + query in near O(1) | Full path/component exploration |
+
+**Problems:** [Number of Islands](number-of-islands/) (UF variant), Accounts Merge, Redundant Connection
+
+---
+
+## Pattern 12: Fast-Slow Pointers (Linked List) ⭐⭐⭐⭐⭐
+
+**When:** Cycle detection, find middle, linked list manipulation
+
+**Template — Find middle:**
+
+```go
+slow, fast := head, head
+for fast != nil && fast.Next != nil {
+    slow = slow.Next
+    fast = fast.Next.Next
+}
+// slow is at middle
+```
+
+**Template — Detect cycle:**
+
+```go
+slow, fast := head, head
+for fast != nil && fast.Next != nil {
+    slow = slow.Next
+    fast = fast.Next.Next
+    if slow == fast {
+        // cycle found — find entry point
+        slow = head
+        for slow != fast {
+            slow = slow.Next
+            fast = fast.Next
+        }
+        return slow // cycle start
+    }
+}
+return nil // no cycle
+```
+
+**Template — Reverse linked list:**
+
+```go
+var prev *ListNode
+curr := head
+for curr != nil {
+    next := curr.Next
+    curr.Next = prev
+    prev = curr
+    curr = next
+}
+return prev
+```
+
+**Problems:** Linked List Cycle, Linked List Cycle II, Middle of Linked List, Reverse Linked List, Merge Two Sorted Lists
+
+---
+
+## Pattern 13: Intervals (Sort + Scan) ⭐⭐⭐⭐⭐
+
+**When:** Overlap detection, merge intervals, meeting scheduling
+
+**Template — Merge intervals:**
+
+```go
+sort.Slice(intervals, func(i, j int) bool {
+    return intervals[i][0] < intervals[j][0]
+})
+
+merged := [][]int{intervals[0]}
+for _, iv := range intervals[1:] {
+    last := merged[len(merged)-1]
+    if iv[0] <= last[1] {
+        last[1] = max(last[1], iv[1]) // overlap → merge
+    } else {
+        merged = append(merged, iv)
+    }
+}
+```
+
+**Template — Meeting Rooms (count overlaps with heap):**
+
+```go
+sort.Slice(intervals, func(i, j int) bool {
+    return intervals[i][0] < intervals[j][0]
+})
+
+h := &MinHeap{} // stores end times
+heap.Init(h)
+for _, iv := range intervals {
+    if h.Len() > 0 && (*h)[0] <= iv[0] {
+        heap.Pop(h) // reuse room
+    }
+    heap.Push(h, iv[1])
+}
+return h.Len() // min rooms needed
+```
+
+**Problems:** [Merge Intervals](merge-intervals/), [Meeting Rooms II](meeting-rooms-ii/), Insert Interval, Non-overlapping Intervals
+
+---
+
+## Pattern 14: Backtracking ⭐⭐⭐⭐
+
+**When:** Generate all combinations, permutations, subsets, choices with constraints
+
+**Template — Subsets (choose / don't choose):**
+
+```go
+func subsets(nums []int) [][]int {
+    result := [][]int{}
+    var backtrack func(start int, path []int)
+    backtrack = func(start int, path []int) {
+        tmp := make([]int, len(path))
+        copy(tmp, path)
+        result = append(result, tmp)
+
+        for i := start; i < len(nums); i++ {
+            backtrack(i+1, append(path, nums[i]))
+        }
+    }
+    backtrack(0, []int{})
+    return result
+}
+```
+
+**Template — Permutations:**
+
+```go
+func permute(nums []int) [][]int {
+    result := [][]int{}
+    used := make([]bool, len(nums))
+    var backtrack func(path []int)
+    backtrack = func(path []int) {
+        if len(path) == len(nums) {
+            tmp := make([]int, len(path))
+            copy(tmp, path)
+            result = append(result, tmp)
+            return
+        }
+        for i := 0; i < len(nums); i++ {
+            if used[i] { continue }
+            used[i] = true
+            backtrack(append(path, nums[i]))
+            used[i] = false
+        }
+    }
+    backtrack([]int{})
+    return result
+}
+```
+
+**Template — Combination Sum (reuse allowed):**
+
+```go
+var backtrack func(start, remain int, path []int)
+backtrack = func(start, remain int, path []int) {
+    if remain == 0 {
+        tmp := make([]int, len(path))
+        copy(tmp, path)
+        result = append(result, tmp)
+        return
+    }
+    for i := start; i < len(candidates); i++ {
+        if candidates[i] > remain { break }
+        backtrack(i, remain-candidates[i], append(path, candidates[i]))
+    }
+}
+```
+
+**Problems:** Subsets, Permutations, Combination Sum, N-Queens, Word Search
+
+---
+
+## Pattern 15: DP (Dynamic Programming) ⭐⭐⭐⭐⭐
 
 **When:** Optimization (min/max) or counting with overlapping subproblems
 
@@ -276,6 +708,13 @@ dp[i] = max(dp[j]+1) for j < i where nums[j] < nums[i]  // LIS
 
 ```go
 dp[i][j] = dp[i-1][j] + dp[i][j-1]           // Unique Paths
+
+// Edit Distance
+if word1[i-1] == word2[j-1] {
+    dp[i][j] = dp[i-1][j-1]
+} else {
+    dp[i][j] = 1 + min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1])
+}
 ```
 
 **Key questions to ask:**
@@ -284,47 +723,86 @@ dp[i][j] = dp[i-1][j] + dp[i][j-1]           // Unique Paths
 2. What's the base case?
 3. What's the transition? (Add for counting, min/max for optimization)
 
-**Problems:** [Climbing Stairs](climbing-stairs/), [Coin Change](coin-change/), [House Robber](house-robber/), [Unique Paths](unique-paths/), [Longest Increasing Subsequence](longest-increasing-subsequence/), [Maximum Subarray](maximum-subarray/)
+**Problems:** [Climbing Stairs](climbing-stairs/), [Coin Change](coin-change/), [House Robber](house-robber/), [Unique Paths](unique-paths/), [Longest Increasing Subsequence](longest-increasing-subsequence/), [Maximum Subarray](maximum-subarray/), Edit Distance
 
 ---
 
-## Pattern 8: Prefix Sum
+## Pattern 16: Data Structure Design ⭐⭐⭐⭐⭐
 
-**When:** Range sum queries, cumulative calculations, "product except self"
+**When:** LRU cache, Min Stack, RandomizedSet — combine data structures for O(1) operations
 
-```go
-// Build
-prefix := make([]int, n+1)
-for i := 0; i < n; i++ {
-    prefix[i+1] = prefix[i] + nums[i]
-}
-
-// Query [left, right] in O(1)
-sum := prefix[right+1] - prefix[left]
-```
-
-**Prefix/Suffix variant:**
+**Template — LRU Cache (HashMap + Doubly Linked List):**
 
 ```go
-// Left pass
-left[0] = base
-for i := 1; i < n; i++ {
-    left[i] = combine(left[i-1], nums[i-1])
+type LRUCache struct {
+    capacity   int
+    cache      map[int]*Node
+    head, tail *Node // dummy nodes
 }
 
-// Right pass
-right[n-1] = base
-for i := n-2; i >= 0; i-- {
-    right[i] = combine(right[i+1], nums[i+1])
+type Node struct {
+    key, val   int
+    prev, next *Node
 }
 
-// Combine
-for i := 0; i < n; i++ {
-    result[i] = merge(left[i], right[i])
+func Constructor(capacity int) LRUCache {
+    head := &Node{}
+    tail := &Node{}
+    head.Next = tail
+    tail.Prev = head
+    return LRUCache{capacity, map[int]*Node{}, head, tail}
+}
+
+func (c *LRUCache) Get(key int) int {
+    if node, ok := c.cache[key]; ok {
+        c.moveToHead(node)
+        return node.val
+    }
+    return -1
+}
+
+func (c *LRUCache) Put(key, value int) {
+    if node, ok := c.cache[key]; ok {
+        node.val = value
+        c.moveToHead(node)
+        return
+    }
+    node := &Node{key: key, val: value}
+    c.cache[key] = node
+    c.addToHead(node)
+    if len(c.cache) > c.capacity {
+        removed := c.removeTail()
+        delete(c.cache, removed.key)
+    }
+}
+
+func (c *LRUCache) addToHead(node *Node) {
+    node.Prev = c.head
+    node.Next = c.head.Next
+    c.head.Next.Prev = node
+    c.head.Next = node
+}
+
+func (c *LRUCache) removeNode(node *Node) {
+    node.Prev.Next = node.Next
+    node.Next.Prev = node.Prev
+}
+
+func (c *LRUCache) moveToHead(node *Node) {
+    c.removeNode(node)
+    c.addToHead(node)
+}
+
+func (c *LRUCache) removeTail() *Node {
+    node := c.tail.Prev
+    c.removeNode(node)
+    return node
 }
 ```
 
-**Problems:** [Range Sum Query](prefix-sums/), [Product of Array Except Self](product-of-array-except-self/), [Trapping Rain Water](trapping-rain-water/), [Count Divisors](count-divisors/)
+**Key insight:** HashMap gives O(1) lookup, doubly linked list gives O(1) insert/remove/reorder.
+
+**Problems:** LRU Cache, Min Stack, Insert Delete GetRandom O(1)
 
 ---
 
@@ -333,30 +811,30 @@ for i := 0; i < n; i++ {
 | Problem | Pattern(s) |
 |---------|-----------|
 | [Two Sum](two-sum/) | HashMap |
-| [Product of Array Except Self](product-of-array-except-self/) | Prefix/Suffix |
-| [Maximum Subarray](maximum-subarray/) | DP (Kadane's) |
-| [Merge Intervals](merge-intervals/) | Sort + Sweep |
+| [Group Anagrams](group-anagrams/) | HashMap |
+| [Longest Consecutive Sequence](longest-consecutive-sequence/) | HashMap (Set) |
 | [Longest Substring Without Repeating](longest-substring-without-repeating/) | Sliding Window + HashMap |
-| [Container With Most Water](container-with-most-water/) | Two Pointers |
-| [Trapping Rain Water](trapping-rain-water/) | Prefix/Suffix or Two Pointers |
-| [Coin Change](coin-change/) | DP |
-| [Climbing Stairs](climbing-stairs/) | DP |
-| [House Robber](house-robber/) | DP |
-| [Unique Paths](unique-paths/) | 2D DP |
-| [Longest Increasing Subsequence](longest-increasing-subsequence/) | DP |
+| [Minimum Window Substring](minimum-window-substring/) | Sliding Window + HashMap |
 | [Range Sum Query](prefix-sums/) | Prefix Sum |
-| [Count Divisors](count-divisors/) | Math (O(1)) |
-| [MaxCounters](max-counters/) | Lazy Propagation |
+| [Product of Array Except Self](product-of-array-except-self/) | Prefix/Suffix |
+| [Container With Most Water](container-with-most-water/) | Two Pointers |
+| [Trapping Rain Water](trapping-rain-water/) | Two Pointers / Prefix-Suffix |
 | [Binary Search](binary-search/) | Binary Search |
 | [Search in Rotated Sorted Array](search-in-rotated-sorted-array/) | Binary Search |
 | [Kth Largest Element](kth-largest-element/) | Heap |
-| [Number of Islands](number-of-islands/) | DFS/BFS |
-| [Course Schedule](course-schedule/) | DFS + Topological Sort |
+| [Top K Frequent Elements](top-k-frequent-elements/) | HashMap + Heap |
+| [Meeting Rooms II](meeting-rooms-ii/) | Intervals + Heap |
+| [Number of Islands](number-of-islands/) | DFS/BFS/Union Find |
+| [Course Schedule](course-schedule/) | Topological Sort |
 | [Lowest Common Ancestor](lowest-common-ancestor/) | DFS (Tree) |
 | [Clone Graph](clone-graph/) | DFS + HashMap |
-| [Group Anagrams](group-anagrams/) | HashMap |
-| [Top K Frequent Elements](top-k-frequent-elements/) | HashMap + Heap |
-| [Longest Consecutive Sequence](longest-consecutive-sequence/) | HashMap (Set) |
-| [Minimum Window Substring](minimum-window-substring/) | Sliding Window + HashMap |
 | [Binary Tree Level Order Traversal](binary-tree-level-order-traversal/) | BFS |
-| [Meeting Rooms II](meeting-rooms-ii/) | Sort + Heap |
+| [Merge Intervals](merge-intervals/) | Intervals (Sort + Scan) |
+| [Maximum Subarray](maximum-subarray/) | DP (Kadane's) |
+| [Climbing Stairs](climbing-stairs/) | DP |
+| [Coin Change](coin-change/) | DP |
+| [House Robber](house-robber/) | DP |
+| [Unique Paths](unique-paths/) | 2D DP |
+| [Longest Increasing Subsequence](longest-increasing-subsequence/) | DP |
+| [Count Divisors](count-divisors/) | Math (O(1)) |
+| [MaxCounters](max-counters/) | Lazy Propagation |
