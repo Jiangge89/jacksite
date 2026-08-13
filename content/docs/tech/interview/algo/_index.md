@@ -47,7 +47,7 @@ for _, item := range items {
 2. **Frequency Counting** — Count occurrences, use counts for decisions
 3. **Existence Set** — `map[int]bool{}` for O(1) "is it there?" checks
 
-**Problems:** [Two Sum](two-sum/), [Group Anagrams](group-anagrams/), [Top K Frequent Elements](top-k-frequent-elements/), [Longest Consecutive Sequence](longest-consecutive-sequence/), [Clone Graph](clone-graph/)
+**Problems:** [Two Sum](top-questions/\1/), [Group Anagrams](top-questions/\1/), [Top K Frequent Elements](top-questions/\1/), [Longest Consecutive Sequence](top-questions/\1/), [Clone Graph](top-questions/\1/)
 
 ---
 
@@ -85,7 +85,7 @@ for windowIsInvalid() {
 record maximum
 ```
 
-**Problems:** [Longest Substring Without Repeating Characters](longest-substring-without-repeating/), [Minimum Window Substring](minimum-window-substring/)
+**Problems:** [Longest Substring Without Repeating Characters](top-questions/\1/), [Minimum Window Substring](top-questions/\1/)
 
 ---
 
@@ -125,7 +125,7 @@ for i := 0; i < n; i++ {
 }
 ```
 
-**Problems:** [Range Sum Query](prefix-sums/), [Product of Array Except Self](product-of-array-except-self/), [Trapping Rain Water](trapping-rain-water/), [Count Divisors](count-divisors/)
+**Problems:** [Range Sum Query](top-questions/\1/), [Product of Array Except Self](top-questions/\1/), [Trapping Rain Water](top-questions/\1/), [Count Divisors](top-questions/\1/)
 
 ---
 
@@ -188,7 +188,7 @@ for fast := 1; fast < len(nums); fast++ {
 return slow + 1
 ```
 
-**Problems:** [Container With Most Water](container-with-most-water/), [Trapping Rain Water](trapping-rain-water/), 3Sum, Remove Duplicates from Sorted Array
+**Problems:** [Container With Most Water](top-questions/\1/), [Trapping Rain Water](top-questions/\1/), 3Sum, Remove Duplicates from Sorted Array
 
 ---
 
@@ -243,7 +243,7 @@ for left < right {
 return left
 ```
 
-**Problems:** [Binary Search](binary-search/), [Search in Rotated Sorted Array](search-in-rotated-sorted-array/)
+**Problems:** [Binary Search](top-questions/\1/), [Search in Rotated Sorted Array](top-questions/\1/)
 
 ---
 
@@ -288,7 +288,7 @@ func (h *MinHeap) Pop() interface{} {
 - Always call `heap.Push` / `heap.Pop`, never `h.Push` / `h.Pop` directly
 - Min heap: `h[i] < h[j]`, Max heap: `h[i] > h[j]`
 
-**Problems:** [Kth Largest Element](kth-largest-element/), [Top K Frequent Elements](top-k-frequent-elements/), [Meeting Rooms II](meeting-rooms-ii/)
+**Problems:** [Kth Largest Element](top-questions/\1/), [Top K Frequent Elements](top-questions/\1/), [Meeting Rooms II](top-questions/\1/)
 
 ---
 
@@ -382,7 +382,7 @@ func dfs(root *TreeNode) *TreeNode {
 }
 ```
 
-**Problems:** [Number of Islands](number-of-islands/) (grid), [Course Schedule](course-schedule/) (cycle detection), [Lowest Common Ancestor](lowest-common-ancestor/) (tree), [Clone Graph](clone-graph/)
+**Problems:** [Number of Islands](top-questions/\1/) (grid), [Course Schedule](top-questions/\1/) (cycle detection), [Lowest Common Ancestor](top-questions/\1/) (tree), [Clone Graph](top-questions/\1/)
 
 ---
 
@@ -420,7 +420,7 @@ for len(queue) > 0 {
 | Use when | Explore all paths, detect cycles | Shortest path, level order |
 | Space | O(depth) | O(width) |
 
-**Problems:** [Binary Tree Level Order Traversal](binary-tree-level-order-traversal/), [Number of Islands](number-of-islands/) (BFS variant), Word Ladder
+**Problems:** [Binary Tree Level Order Traversal](top-questions/\1/), [Number of Islands](top-questions/\1/) (BFS variant), Word Ladder
 
 ---
 
@@ -460,7 +460,7 @@ for len(queue) > 0 {
 // len(order) < n → cycle exists
 ```
 
-**Problems:** [Course Schedule](course-schedule/), Course Schedule II, Alien Dictionary
+**Problems:** [Course Schedule](top-questions/\1/), Course Schedule II, Alien Dictionary
 
 ---
 
@@ -503,7 +503,7 @@ union := func(x, y int) {
 | Use when | Dynamic edges, online queries | Static graph, one-time traversal |
 | Strength | Merge + query in near O(1) | Full path/component exploration |
 
-**Problems:** [Number of Islands](number-of-islands/) (UF variant), Accounts Merge, Redundant Connection
+**Problems:** [Number of Islands](top-questions/\1/) (UF variant), Accounts Merge, Redundant Connection
 
 ---
 
@@ -600,7 +600,7 @@ for _, iv := range intervals {
 return h.Len() // min rooms needed
 ```
 
-**Problems:** [Merge Intervals](merge-intervals/), [Meeting Rooms II](meeting-rooms-ii/), Insert Interval, Non-overlapping Intervals
+**Problems:** [Merge Intervals](top-questions/\1/), [Meeting Rooms II](top-questions/\1/), Insert Interval, Non-overlapping Intervals
 
 ---
 
@@ -723,7 +723,7 @@ if word1[i-1] == word2[j-1] {
 2. What's the base case?
 3. What's the transition? (Add for counting, min/max for optimization)
 
-**Problems:** [Climbing Stairs](climbing-stairs/), [Coin Change](coin-change/), [House Robber](house-robber/), [Unique Paths](unique-paths/), [Longest Increasing Subsequence](longest-increasing-subsequence/), [Maximum Subarray](maximum-subarray/), Edit Distance
+**Problems:** [Climbing Stairs](top-questions/\1/), [Coin Change](top-questions/\1/), [House Robber](top-questions/\1/), [Unique Paths](top-questions/\1/), [Longest Increasing Subsequence](top-questions/\1/), [Maximum Subarray](top-questions/\1/), Edit Distance
 
 ---
 
@@ -810,31 +810,31 @@ func (c *LRUCache) removeTail() *Node {
 
 | Problem | Pattern(s) |
 |---------|-----------|
-| [Two Sum](two-sum/) | HashMap |
-| [Group Anagrams](group-anagrams/) | HashMap |
-| [Longest Consecutive Sequence](longest-consecutive-sequence/) | HashMap (Set) |
-| [Longest Substring Without Repeating](longest-substring-without-repeating/) | Sliding Window + HashMap |
-| [Minimum Window Substring](minimum-window-substring/) | Sliding Window + HashMap |
-| [Range Sum Query](prefix-sums/) | Prefix Sum |
-| [Product of Array Except Self](product-of-array-except-self/) | Prefix/Suffix |
-| [Container With Most Water](container-with-most-water/) | Two Pointers |
-| [Trapping Rain Water](trapping-rain-water/) | Two Pointers / Prefix-Suffix |
-| [Binary Search](binary-search/) | Binary Search |
-| [Search in Rotated Sorted Array](search-in-rotated-sorted-array/) | Binary Search |
-| [Kth Largest Element](kth-largest-element/) | Heap |
-| [Top K Frequent Elements](top-k-frequent-elements/) | HashMap + Heap |
-| [Meeting Rooms II](meeting-rooms-ii/) | Intervals + Heap |
-| [Number of Islands](number-of-islands/) | DFS/BFS/Union Find |
-| [Course Schedule](course-schedule/) | Topological Sort |
-| [Lowest Common Ancestor](lowest-common-ancestor/) | DFS (Tree) |
-| [Clone Graph](clone-graph/) | DFS + HashMap |
-| [Binary Tree Level Order Traversal](binary-tree-level-order-traversal/) | BFS |
-| [Merge Intervals](merge-intervals/) | Intervals (Sort + Scan) |
-| [Maximum Subarray](maximum-subarray/) | DP (Kadane's) |
-| [Climbing Stairs](climbing-stairs/) | DP |
-| [Coin Change](coin-change/) | DP |
-| [House Robber](house-robber/) | DP |
-| [Unique Paths](unique-paths/) | 2D DP |
-| [Longest Increasing Subsequence](longest-increasing-subsequence/) | DP |
-| [Count Divisors](count-divisors/) | Math (O(1)) |
-| [MaxCounters](max-counters/) | Lazy Propagation |
+| [Two Sum](top-questions/\1/) | HashMap |
+| [Group Anagrams](top-questions/\1/) | HashMap |
+| [Longest Consecutive Sequence](top-questions/\1/) | HashMap (Set) |
+| [Longest Substring Without Repeating](top-questions/\1/) | Sliding Window + HashMap |
+| [Minimum Window Substring](top-questions/\1/) | Sliding Window + HashMap |
+| [Range Sum Query](top-questions/\1/) | Prefix Sum |
+| [Product of Array Except Self](top-questions/\1/) | Prefix/Suffix |
+| [Container With Most Water](top-questions/\1/) | Two Pointers |
+| [Trapping Rain Water](top-questions/\1/) | Two Pointers / Prefix-Suffix |
+| [Binary Search](top-questions/\1/) | Binary Search |
+| [Search in Rotated Sorted Array](top-questions/\1/) | Binary Search |
+| [Kth Largest Element](top-questions/\1/) | Heap |
+| [Top K Frequent Elements](top-questions/\1/) | HashMap + Heap |
+| [Meeting Rooms II](top-questions/\1/) | Intervals + Heap |
+| [Number of Islands](top-questions/\1/) | DFS/BFS/Union Find |
+| [Course Schedule](top-questions/\1/) | Topological Sort |
+| [Lowest Common Ancestor](top-questions/\1/) | DFS (Tree) |
+| [Clone Graph](top-questions/\1/) | DFS + HashMap |
+| [Binary Tree Level Order Traversal](top-questions/\1/) | BFS |
+| [Merge Intervals](top-questions/\1/) | Intervals (Sort + Scan) |
+| [Maximum Subarray](top-questions/\1/) | DP (Kadane's) |
+| [Climbing Stairs](top-questions/\1/) | DP |
+| [Coin Change](top-questions/\1/) | DP |
+| [House Robber](top-questions/\1/) | DP |
+| [Unique Paths](top-questions/\1/) | 2D DP |
+| [Longest Increasing Subsequence](top-questions/\1/) | DP |
+| [Count Divisors](top-questions/\1/) | Math (O(1)) |
+| [MaxCounters](top-questions/\1/) | Lazy Propagation |
