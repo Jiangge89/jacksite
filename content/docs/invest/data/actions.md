@@ -1,5 +1,5 @@
 ---
-title: Actions
+title: "Actions"
 weight: 4
 ---
 
@@ -63,17 +63,41 @@ weight: 4
 
 ## 下周一 (Aug 10)
 
-- [x] TEAM 盘前建仓 Starter 2-3%：20 shares @ $149.50（$2,990）。Workflow 板块
-- [x] MNDY 盘前建仓 Starter：50 shares @ $94.67（$4,734）。Workflow 板块。Q2 财报 BMO ⚠️ 赌财报
-- [ ] VEEV 加仓 Starter→Half 5%：加 15 shares @ ~$230（~$3,450）。15→30 股。未执行
-- [x] SNOW 加仓 Starter→Half 5%：加 10 shares @ $334.40（$3,344）。10→20 股
-- [x] DDOG 清仓：卖 30 shares @ $234（$7,020）。Thesis 弱化
+- [ ] TEAM 盘前建仓 Starter 2-3%：~20-25 shares @ ~$113（~$2,500）。Workflow 板块。Fwd P/E 16x，P/S 3.7x，PEG 0.9。回调 10% 到 ~$102 加到 Half
+- [ ] MNDY 盘前建仓 Starter 1-2%：~15-20 shares @ ~$88（~$1,500）。Workflow 板块。Fwd P/E 18x，PEG 0.75。Q2 财报 Aug 10 BMO，赌财报。⚠️ 如 miss 支撑 $70-75
+- [ ] VEEV 加仓 Starter→Half 5%：加 15 shares @ ~$230（~$3,450）。15→30 股
+- [ ] SNOW 加仓 Starter→Half 5%：加 11 shares @ ~$330（~$3,630）。10→21 股
+- [ ] DDOG 减仓 Half→Starter：卖 20 shares（30→10 股）。Thesis 弱化，定价权侵蚀
+
+预计用资：~$11,080（TEAM + MNDY + VEEV + SNOW）- ~$4,720（DDOG 卖出）= 净用资 ~$6,360
+Cash 变化：$31,007 → ~$24,647（~18%）
+
+## 待触发
+
+- [ ] PANW：如因中国安全审查（Aug 6 启动，类 Micron 模式）大跌 → 加仓机会。中国收入占比 <2%，基本面不受影响。Aug 24 财报前评估
+- [ ] ZS：当前 $176，浮亏 -13%。如破前期高点（~$180-185）+ 放量站稳 → 浮亏收窄至 -10% 以内时加仓到 Half/Full
+- [ ] DDOG：CPI 后回调至 $240-245 → 建 Starter 2%。不追 $260+
+- [ ] VEEV：加仓 Starter→Half 待执行。15→30 股 @ ~$230
+
+## 本周 (Aug 11-14)
+
+- [x] ABAT: 减仓 1,000 股 @ $2.55（4,000→3,000 股）。Aug 12 执行。手续费 $4.63
+- [x] MNDY: 清仓 50 股 @ $87。Aug 12 执行。亏损 ~$384（-8.1%）
+- [x] DDOG: 重新建仓 15 股 @ $246.80。Aug 12 执行。Starter 2.7%
+- [x] VEEV: 加仓 15 股 @ $235.60（15→30 股）。Aug 12 执行。Starter→Half 5.3%
+- [x] BA: 减仓 30 股 @ $230（50→20 股）。Aug 12 执行。锁利。剩余零成本+
+- [x] AMD: 清仓 5 股 @ $494。Aug 13 执行。零成本，$2,470 全利润
+- [x] MSFT: 加仓 8 股 @ $496（20→28 股）。Aug 14 执行。接近 Full 10%
+- [ ] TEAM: 限价单 20 股 @ $163（20→40 股）。Aug 14 挂单。目标 Half 5%。待成交
+- [ ] ABAT: 限价单 2,000 股 @ $4.50 卖出。远期目标
+- [ ] CCXI: 限价单 300 股 @ $20 清仓。远期目标
+- [ ] VEEV: 财报 Aug 26。观察后决定是否加到 Full 10%
+- [ ] ZS: 财报 Sep 2-3。等财报后决定
+- [ ] PANW: 财报 Sep 1（⚠️ 原报 Aug 24 有误）。~Aug 25-27 跑 /earnings-preview
 
 ## 持续关注
 
 - [ ] 每周一更新 portfolio.md 的 Total Equity
-- [ ] PANW 减仓后~10%，财报前已合规
+- [ ] PANW ~10.9%，Aug 24 财报前评估是否减仓
 - [ ] ABAT 减仓计划：$4-5 卖 2,000 股 → $5+ 卖 2,000 股 → 保留 1,000 股。⚠️ 跌破 $2.40 也执行减仓
-- [ ] ZS：已减仓过，当前 -38% 不再继续减仓，持有观察
 - [ ] ABAT / BA / NVAX / CCXI：消息面投机股，非 thesis 驱动，注意区分核心仓位和投机仓位
-- [ ] DDOG：Thesis 修正后放回 watchlist。入场条件：CPI 后回调至 $240-245 建 Starter 2%。不追 $260+
