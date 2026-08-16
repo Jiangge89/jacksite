@@ -1,5 +1,5 @@
 ---
-title: "Actions"
+title: Actions
 weight: 4
 ---
 
@@ -93,11 +93,12 @@ Cash 变化：$31,007 → ~$24,647（~18%）
 - [ ] CCXI: 限价单 300 股 @ $20 清仓。远期目标
 - [ ] VEEV: 财报 Aug 26。观察后决定是否加到 Full 10%
 - [ ] ZS: 财报 Sep 2-3。等财报后决定
-- [ ] PANW: 财报 Sep 1（⚠️ 原报 Aug 24 有误）。~Aug 25-27 跑 /earnings-preview
+- [ ] PANW: 减仓 20 股（40→20），降到 ~5%。财报 Sep 1 前执行。锁利 ~$2,790
+- [ ] PANW: ~Aug 25-27 跑 /earnings-preview
 
 ## 持续关注
 
 - [ ] 每周一更新 portfolio.md 的 Total Equity
-- [ ] PANW ~10.9%，Aug 24 财报前评估是否减仓
+- [x] PANW 减仓决定：40→20 股，降到 ~5%。13F 信号 mixed + 分析师均价 $339 低于现价 + Fwd P/E 96x
 - [ ] ABAT 减仓计划：$4-5 卖 2,000 股 → $5+ 卖 2,000 股 → 保留 1,000 股。⚠️ 跌破 $2.40 也执行减仓
 - [ ] ABAT / BA / NVAX / CCXI：消息面投机股，非 thesis 驱动，注意区分核心仓位和投机仓位
