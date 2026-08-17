@@ -62,43 +62,427 @@ Pattern recognition 比较稳定。看到 Top K、K-th
 largest/smallest、continuously get min/max、merge K sorted
 lists，应优先想到 Heap。
 
-Go 重点保证 `container/heap` implementation 熟练。
+### 关键词 → Heap
 
-## 4. Binary Search --- A
+``` text
+Top K / K-th largest / K-th smallest → Min Heap (size K)
+Continuously get min/max             → Min/Max Heap
+Merge K sorted lists/arrays          → Min Heap
+Median of stream                     → Two Heaps (max + min)
+Meeting Rooms / Intervals + overlap  → Min Heap (by end time)
+```
 
-Lower bound 模板：
+### Go `container/heap` 完整实现
+
+Go 的 heap 需要实现 `heap.Interface`（5 个方法）。**你写的 `Push`/`Pop` 操作 slice 尾部，`heap` 包内部负责 sift up/down。**
 
 ``` go
-left, right := 0, len(nums)
-for left < right {
-    mid := left + (right-left)/2
-    if nums[mid] >= target {
-        right = mid
-    } else {
-        left = mid + 1
-    }
+import "container/heap"
+
+// --- Min Heap ---
+type MinHeap []int
+
+func (h MinHeap) Len() int            { return len(h) }
+func (h MinHeap) Less(i, j int) bool  { return h[i] < h[j] }  // < 就是 Min Heap
+func (h MinHeap) Swap(i, j int)       { h[i], h[j] = h[j], h[i] }
+func (h *MinHeap) Push(x any)         { *h = append(*h, x.(int)) }
+func (h *MinHeap) Pop() any {
+    old := *h
+    n := len(old)
+    x := old[n-1]
+    *h = old[:n-1]
+    return x
+}
+
+// --- Max Heap ---
+// 只改 Less：> 就是 Max Heap
+type MaxHeap []int
+
+func (h MaxHeap) Len() int            { return len(h) }
+func (h MaxHeap) Less(i, j int) bool  { return h[i] > h[j] }  // > 就是 Max Heap
+func (h MaxHeap) Swap(i, j int)       { h[i], h[j] = h[j], h[i] }
+func (h *MaxHeap) Push(x any)         { *h = append(*h, x.(int)) }
+func (h *MaxHeap) Pop() any {
+    old := *h
+    n := len(old)
+    x := old[n-1]
+    *h = old[:n-1]
+    return x
 }
 ```
 
-目标：find the first index where `nums[i] >= target`。
+**重点记忆：**
+
+| | Min Heap | Max Heap |
+|---|---|---|
+| `Less(i,j)` | `h[i] < h[j]` | `h[i] > h[j]` |
+| `heap.Pop()` 返回 | 最小值 | 最大值 |
+| Top K largest | 维护 size K 的 **Min Heap** | ✗ |
+| Top K smallest | ✗ | 维护 size K 的 **Max Heap** |
+
+**为什么 Top K largest 用 Min Heap？** 因为 Pop 掉最小的，留下的 K 个就是最大的。
+
+### 使用示例：Top K Frequent Elements
+
+``` go
+func topKFrequent(nums []int, k int) []int {
+    freq := map[int]int{}
+    for _, n := range nums {
+        freq[n]++
+    }
+
+    h := &MinHeap{}
+    heap.Init(h)
+    for num, count := range freq {
+        heap.Push(h, [2]int{count, num})
+        if h.Len() > k {
+            heap.Pop(h)
+        }
+    }
+
+    result := make([]int, k)
+    for i := k - 1; i >= 0; i-- {
+        result[i] = heap.Pop(h).([2]int)[1]
+    }
+    return result
+}
+```
+
+### 使用示例：Merge K Sorted Lists
+
+``` go
+type ListNodeHeap []*ListNode
+
+func (h ListNodeHeap) Len() int            { return len(h) }
+func (h ListNodeHeap) Less(i, j int) bool  { return h[i].Val < h[j].Val }
+func (h ListNodeHeap) Swap(i, j int)       { h[i], h[j] = h[j], h[i] }
+func (h *ListNodeHeap) Push(x any)         { *h = append(*h, x.(*ListNode)) }
+func (h *ListNodeHeap) Pop() any {
+    old := *h
+    n := len(old)
+    x := old[n-1]
+    *h = old[:n-1]
+    return x
+}
+
+func mergeKLists(lists []*ListNode) *ListNode {
+    h := &ListNodeHeap{}
+    heap.Init(h)
+    for _, l := range lists {
+        if l != nil {
+            heap.Push(h, l)
+        }
+    }
+    dummy := &ListNode{}
+    curr := dummy
+    for h.Len() > 0 {
+        node := heap.Pop(h).(*ListNode)
+        curr.Next = node
+        curr = curr.Next
+        if node.Next != nil {
+            heap.Push(h, node.Next)
+        }
+    }
+    return dummy.Next
+}
+```
+
+### 常见错误
+
+``` text
+✗ 直接调用 h.Push() / h.Pop()     → 必须调用 heap.Push(h, x) / heap.Pop(h)
+✗ Pop 里删 index 0                 → 必须删最后一个元素（heap 包会先 swap 到尾部）
+✗ 忘记 heap.Init(h)                → 如果初始就有元素，必须先 Init
+```
+
+### 复杂度
+
+``` text
+heap.Init:  O(n)
+heap.Push:  O(log n)
+heap.Pop:   O(log n)
+Top K:      O(n log k)
+```
+
+## 4. Binary Search --- A
+
+### 核心本质
+
+Binary Search 的核心不是"找某个值"，而是**在一个单调布尔序列里找边界**——找第一个让 `condition(mid)` 为 true 的位置。
+
+Lower bound / upper bound / exact search 都只是 `condition()` 的具体化。
+
+### 统一模板（通用 condition helper）
+
+``` go
+func binarySearch(n int, condition func(mid int) bool) int {
+    left, right := 0, n
+    for left < right {
+        mid := left + (right-left)/2
+        if condition(mid) {
+            right = mid
+        } else {
+            left = mid + 1
+        }
+    }
+    return left
+}
+```
+
+### Lower Bound：第一个 >= target
+
+``` go
+func lowerBound(nums []int, target int) int {
+    left, right := 0, len(nums)
+    for left < right {
+        mid := left + (right-left)/2
+        if nums[mid] >= target {  // condition: >= target
+            right = mid
+        } else {
+            left = mid + 1
+        }
+    }
+    return left
+}
+```
+
+### Upper Bound：第一个 > target
+
+``` go
+func upperBound(nums []int, target int) int {
+    left, right := 0, len(nums)
+    for left < right {
+        mid := left + (right-left)/2
+        if nums[mid] > target {  // condition: > target
+            right = mid
+        } else {
+            left = mid + 1
+        }
+    }
+    return left
+}
+```
+
+### Exact Search：基于 Lower Bound
+
+``` go
+func exactSearch(nums []int, target int) int {
+    i := lowerBound(nums, target)
+    if i < len(nums) && nums[i] == target {
+        return i
+    }
+    return -1
+}
+```
+
+### 所有变体的统一关系
+
+``` text
+first >= x   = lowerBound(x)
+first > x    = upperBound(x)
+last < x     = lowerBound(x) - 1
+last <= x    = upperBound(x) - 1
+exact x      = lowerBound(x)，然后检查 == x
+count of x   = upperBound(x) - lowerBound(x)
+```
+
+### Search on Answer（搜索答案空间）
+
+当问题不是在数组里搜索，而是在答案空间里搜索最小/最大可行值：
+
+``` go
+left, right := minPossible, maxPossible
+for left < right {
+    mid := left + (right-left)/2
+    if canAchieve(mid) {
+        right = mid     // feasible → try smaller
+    } else {
+        left = mid + 1  // not feasible → go bigger
+    }
+}
+return left
+```
+
+### Rotated Sorted Array
+
+先判断哪半边是 sorted，再决定 target 在哪边：
+
+``` go
+func search(nums []int, target int) int {
+    left, right := 0, len(nums)-1
+    for left <= right {
+        mid := left + (right-left)/2
+        if nums[mid] == target {
+            return mid
+        }
+        if nums[left] <= nums[mid] { // left half sorted
+            if target >= nums[left] && target < nums[mid] {
+                right = mid - 1
+            } else {
+                left = mid + 1
+            }
+        } else { // right half sorted
+            if target > nums[mid] && target <= nums[right] {
+                left = mid + 1
+            } else {
+                right = mid - 1
+            }
+        }
+    }
+    return -1
+}
+```
+
+### 关键词 → Binary Search
+
+``` text
+sorted array + find target          → exact search / lower bound
+first/last occurrence               → lower bound / upper bound
+"minimum X such that condition"     → search on answer
+rotated sorted array                → modified binary search
+peak element / mountain array       → binary search on condition
+```
+
+### 复杂度
+
+``` text
+Time:  O(log n)
+Space: O(1)
+```
 
 ## 5. Linked List --- A
 
-Reverse Linked List mental model：
-
-``` text
-prev
-current
-next
-```
-
-核心：
+### Go Struct 定义
 
 ``` go
-next := curr.Next
-curr.Next = prev
-prev = curr
-curr = next
+type ListNode struct {
+    Val  int
+    Next *ListNode
+}
+```
+
+### Dummy Head 技巧
+
+当 head 可能被修改（删除、插入）时，用 dummy node 避免特殊处理：
+
+``` go
+dummy := &ListNode{Next: head}
+curr := dummy
+// ... 操作 ...
+return dummy.Next
+```
+
+### Reverse Linked List
+
+Mental model：三个指针 prev / curr / next
+
+``` go
+func reverseList(head *ListNode) *ListNode {
+    var prev *ListNode
+    curr := head
+    for curr != nil {
+        next := curr.Next
+        curr.Next = prev
+        prev = curr
+        curr = next
+    }
+    return prev
+}
+```
+
+### Detect Cycle（快慢指针）
+
+``` go
+func hasCycle(head *ListNode) bool {
+    slow, fast := head, head
+    for fast != nil && fast.Next != nil {
+        slow = slow.Next
+        fast = fast.Next.Next
+        if slow == fast {
+            return true
+        }
+    }
+    return false
+}
+```
+
+### Find Cycle Entry
+
+``` go
+func detectCycle(head *ListNode) *ListNode {
+    slow, fast := head, head
+    for fast != nil && fast.Next != nil {
+        slow = slow.Next
+        fast = fast.Next.Next
+        if slow == fast {
+            slow = head
+            for slow != fast {
+                slow = slow.Next
+                fast = fast.Next
+            }
+            return slow
+        }
+    }
+    return nil
+}
+```
+
+### Find Middle
+
+``` go
+func middleNode(head *ListNode) *ListNode {
+    slow, fast := head, head
+    for fast != nil && fast.Next != nil {
+        slow = slow.Next
+        fast = fast.Next.Next
+    }
+    return slow
+}
+```
+
+### Merge Two Sorted Lists
+
+``` go
+func mergeTwoLists(l1, l2 *ListNode) *ListNode {
+    dummy := &ListNode{}
+    curr := dummy
+    for l1 != nil && l2 != nil {
+        if l1.Val <= l2.Val {
+            curr.Next = l1
+            l1 = l1.Next
+        } else {
+            curr.Next = l2
+            l2 = l2.Next
+        }
+        curr = curr.Next
+    }
+    if l1 != nil {
+        curr.Next = l1
+    } else {
+        curr.Next = l2
+    }
+    return dummy.Next
+}
+```
+
+### 关键词 → Linked List Pattern
+
+``` text
+reverse / palindrome            → reverse linked list
+cycle detection                 → fast-slow pointers
+find middle                     → fast-slow pointers
+merge sorted                    → dummy head + two pointers
+remove nth from end             → two pointers (gap = n)
+intersection of two lists       → align lengths / two-pass
+```
+
+### 复杂度
+
+``` text
+Reverse:     O(n) time, O(1) space
+Cycle:       O(n) time, O(1) space
+Find Middle: O(n) time, O(1) space
+Merge:       O(n+m) time, O(1) space
 ```
 
 ## 6. LRU Cache --- A-/B+
@@ -106,45 +490,103 @@ curr = next
 核心结构：
 
 ``` text
-HashMap<key, Node>
-+
-Doubly Linked List
+HashMap<key, *Node>  +  Doubly Linked List
 
-head ⇄ MRU ⇄ ... ⇄ LRU ⇄ tail
+head(dummy) ⇄ MRU ⇄ ... ⇄ LRU ⇄ tail(dummy)
 ```
 
-Node：
+操作逻辑：
+
+``` text
+get → lookup → moveToHead
+put existing → update value → moveToHead
+put new → create node → map insert → addToHead
+over capacity → remove tail.prev → delete map[lru.key]
+```
+
+### 完整 Go 实现
 
 ``` go
+type LRUCache struct {
+    capacity   int
+    cache      map[int]*Node
+    head, tail *Node
+}
+
 type Node struct {
     key, value int
     prev, next *Node
 }
+
+func Constructor(capacity int) LRUCache {
+    head := &Node{}
+    tail := &Node{}
+    head.next = tail
+    tail.prev = head
+    return LRUCache{capacity, map[int]*Node{}, head, tail}
+}
+
+func (c *LRUCache) Get(key int) int {
+    if node, ok := c.cache[key]; ok {
+        c.moveToHead(node)
+        return node.value
+    }
+    return -1
+}
+
+func (c *LRUCache) Put(key, value int) {
+    if node, ok := c.cache[key]; ok {
+        node.value = value
+        c.moveToHead(node)
+        return
+    }
+    node := &Node{key: key, value: value}
+    c.cache[key] = node
+    c.addToHead(node)
+    if len(c.cache) > c.capacity {
+        lru := c.removeTail()
+        delete(c.cache, lru.key)
+    }
+}
+
+func (c *LRUCache) addToHead(node *Node) {
+    node.prev = c.head
+    node.next = c.head.next
+    c.head.next.prev = node
+    c.head.next = node
+}
+
+func (c *LRUCache) removeNode(node *Node) {
+    node.prev.next = node.next
+    node.next.prev = node.prev
+}
+
+func (c *LRUCache) moveToHead(node *Node) {
+    c.removeNode(node)
+    c.addToHead(node)
+}
+
+func (c *LRUCache) removeTail() *Node {
+    node := c.tail.prev
+    c.removeNode(node)
+    return node
+}
 ```
 
-删除：
-
-``` go
-node.prev.next = node.next
-node.next.prev = node.prev
-```
-
-插入 head：
-
-``` go
-node.prev = head
-node.next = head.next
-head.next.prev = node
-head.next = node
-```
-
-操作：
+### 为什么需要 Doubly Linked List？
 
 ``` text
-get → lookup → moveToHead
-put existing → update → moveToHead
-put new → create → map insert → addToHead
-over capacity → remove tail.prev → delete map[lru.key]
+HashMap → O(1) lookup by key
+DLL    → O(1) insert/remove/reorder
+```
+
+Singly linked list 无法 O(1) 删除（不知道 prev）。
+
+### 为什么 Node 需要存 key？
+
+``` text
+evict tail 时需要从 map 中删除，但 map.delete 需要 key。
+如果 Node 不存 key，就不知道该删 map 中的哪个 entry。
 ```
 
 **结论：不用重新学，mock 前完整手写一次。**
@@ -205,53 +647,288 @@ sum := prefix[right+1] - prefix[left]
 
 > 对每个元素寻找右侧第一个 greater/smaller element → Monotonic Stack。
 
+### Next Greater Element
+
 通常存 index：
 
 ``` go
-stack := []int{}
-for i := 0; i < len(nums); i++ {
-    for len(stack) > 0 && nums[i] > nums[stack[len(stack)-1]] {
-        j := stack[len(stack)-1]
-        stack = stack[:len(stack)-1]
-        result[j] = i - j
+func dailyTemperatures(temperatures []int) []int {
+    n := len(temperatures)
+    result := make([]int, n)
+    stack := []int{}  // stores indices, monotonically decreasing
+
+    for i := 0; i < n; i++ {
+        for len(stack) > 0 && temperatures[i] > temperatures[stack[len(stack)-1]] {
+            j := stack[len(stack)-1]
+            stack = stack[:len(stack)-1]
+            result[j] = i - j
+        }
+        stack = append(stack, i)
     }
-    stack = append(stack, i)
+    return result
 }
 ```
 
 每个 index 最多 push/pop 一次，所以 O(n)。
 
+### Monotonic Stack 变体
+
+``` text
+Next Greater Element  → 维护递减栈，遇到更大的就 pop
+Next Smaller Element  → 维护递增栈，遇到更小的就 pop
+Previous Greater      → 从左往右，递减栈
+Previous Smaller      → 从左往右，递增栈
+```
+
+### 关键词 → Monotonic Stack
+
+``` text
+next greater / next warmer day   → Monotonic Stack
+largest rectangle in histogram   → Monotonic Stack
+stock span                       → Monotonic Stack
+```
+
 ## 10. Tree --- B-/C+
 
 需要系统补基础。
 
-Traversal：
-
-``` text
-Preorder:  Root → Left → Right
-Inorder:   Left → Root → Right
-Postorder: Left → Right → Root
-```
-
-Maximum Depth：
-
-``` text
-depth(node) = 1 + max(depth(left), depth(right))
-```
-
-复杂度：
-
-``` text
-Time: O(n)
-Space: O(h)
-balanced: O(log n)
-skewed worst case: O(n)
-```
-
-Level-order BFS 使用 Queue，每轮先：
+### Go Struct 定义
 
 ``` go
-levelSize := len(queue)
+type TreeNode struct {
+    Val   int
+    Left  *TreeNode
+    Right *TreeNode
+}
+```
+
+### Traversal 顺序
+
+``` text
+Preorder:  Root → Left → Right   (常用于 copy / serialize)
+Inorder:   Left → Root → Right   (BST 中得到有序序列)
+Postorder: Left → Right → Root   (常用于 delete / 计算子树结果)
+```
+
+### DFS 递归模板
+
+``` go
+// Preorder
+func preorder(root *TreeNode, result *[]int) {
+    if root == nil { return }
+    *result = append(*result, root.Val)
+    preorder(root.Left, result)
+    preorder(root.Right, result)
+}
+
+// Inorder
+func inorder(root *TreeNode, result *[]int) {
+    if root == nil { return }
+    inorder(root.Left, result)
+    *result = append(*result, root.Val)
+    inorder(root.Right, result)
+}
+
+// Postorder
+func postorder(root *TreeNode, result *[]int) {
+    if root == nil { return }
+    postorder(root.Left, result)
+    postorder(root.Right, result)
+    *result = append(*result, root.Val)
+}
+```
+
+### DFS 通用递归框架
+
+大部分 Tree 题都是这个 pattern：
+
+``` go
+func dfs(root *TreeNode) ResultType {
+    // base case
+    if root == nil {
+        return baseValue
+    }
+    // 递归处理左右子树
+    left := dfs(root.Left)
+    right := dfs(root.Right)
+    // 用 left, right, root.Val 合并出当前节点的结果
+    return combine(left, right, root.Val)
+}
+```
+
+### 经典 DFS 示例
+
+``` go
+// Maximum Depth
+func maxDepth(root *TreeNode) int {
+    if root == nil { return 0 }
+    return 1 + max(maxDepth(root.Left), maxDepth(root.Right))
+}
+
+// Invert Binary Tree
+func invertTree(root *TreeNode) *TreeNode {
+    if root == nil { return nil }
+    root.Left, root.Right = invertTree(root.Right), invertTree(root.Left)
+    return root
+}
+
+// Is Balanced
+func isBalanced(root *TreeNode) bool {
+    return height(root) != -1
+}
+func height(root *TreeNode) int {
+    if root == nil { return 0 }
+    l := height(root.Left)
+    r := height(root.Right)
+    if l == -1 || r == -1 || abs(l-r) > 1 {
+        return -1
+    }
+    return 1 + max(l, r)
+}
+
+// Lowest Common Ancestor
+func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
+    if root == nil || root == p || root == q {
+        return root
+    }
+    left := lowestCommonAncestor(root.Left, p, q)
+    right := lowestCommonAncestor(root.Right, p, q)
+    if left != nil && right != nil {
+        return root
+    }
+    if left != nil { return left }
+    return right
+}
+
+// Diameter of Binary Tree
+var diameter int
+func diameterOfBinaryTree(root *TreeNode) int {
+    diameter = 0
+    depthForDiameter(root)
+    return diameter
+}
+func depthForDiameter(root *TreeNode) int {
+    if root == nil { return 0 }
+    l := depthForDiameter(root.Left)
+    r := depthForDiameter(root.Right)
+    diameter = max(diameter, l+r)
+    return 1 + max(l, r)
+}
+```
+
+### BFS 层序遍历模板
+
+``` go
+func levelOrder(root *TreeNode) [][]int {
+    if root == nil { return nil }
+    var result [][]int
+    queue := []*TreeNode{root}
+
+    for len(queue) > 0 {
+        levelSize := len(queue)  // 关键：先取当前层的大小
+        level := make([]int, 0, levelSize)
+
+        for i := 0; i < levelSize; i++ {
+            node := queue[0]
+            queue = queue[1:]
+            level = append(level, node.Val)
+
+            if node.Left != nil {
+                queue = append(queue, node.Left)
+            }
+            if node.Right != nil {
+                queue = append(queue, node.Right)
+            }
+        }
+        result = append(result, level)
+    }
+    return result
+}
+```
+
+### DFS 迭代版本（用显式栈）
+
+``` go
+// Iterative Preorder
+func preorderIterative(root *TreeNode) []int {
+    if root == nil { return nil }
+    var result []int
+    stack := []*TreeNode{root}
+    for len(stack) > 0 {
+        node := stack[len(stack)-1]
+        stack = stack[:len(stack)-1]
+        result = append(result, node.Val)
+        if node.Right != nil { stack = append(stack, node.Right) }
+        if node.Left != nil { stack = append(stack, node.Left) }
+    }
+    return result
+}
+
+// Iterative Inorder
+func inorderIterative(root *TreeNode) []int {
+    var result []int
+    var stack []*TreeNode
+    curr := root
+    for curr != nil || len(stack) > 0 {
+        for curr != nil {
+            stack = append(stack, curr)
+            curr = curr.Left
+        }
+        curr = stack[len(stack)-1]
+        stack = stack[:len(stack)-1]
+        result = append(result, curr.Val)
+        curr = curr.Right
+    }
+    return result
+}
+```
+
+### BST 特殊性质
+
+``` text
+Inorder traversal of BST → sorted sequence
+Search / Insert / Delete → O(h), balanced = O(log n)
+Validate BST → inorder check 或 递归传递 (min, max) range
+```
+
+``` go
+func isValidBST(root *TreeNode) bool {
+    return validate(root, math.MinInt64, math.MaxInt64)
+}
+func validate(node *TreeNode, min, max int) bool {
+    if node == nil { return true }
+    if node.Val <= min || node.Val >= max { return false }
+    return validate(node.Left, min, node.Val) && validate(node.Right, node.Val, max)
+}
+```
+
+### 关键词 → Tree Pattern
+
+``` text
+depth / height / balanced         → DFS 递归返回 int
+path sum / max path sum           → DFS 递归 + 全局变量
+LCA                               → DFS 递归返回 *TreeNode
+serialize / deserialize           → preorder DFS
+level order / zigzag / right view → BFS
+BST search / validate / kth       → BST 性质 + inorder
+```
+
+### 复杂度
+
+``` text
+Time:  O(n) — 每个节点访问一次
+Space: O(h) — 递归栈深度
+  balanced tree: O(log n)
+  skewed tree:   O(n)
+BFS space: O(w) — 最宽层的宽度，worst case O(n/2)
+```
+
+### 常见错误
+
+``` text
+✗ Maximum Depth 误判为 O(log n) time → 实际 O(n)，每个节点都要访问
+✗ Space 误判为 O(1) → 递归栈是 O(h)
+✗ Preorder / Inorder 混淆 → 记住 "Pre" = root 在前，"In" = root 在中间
 ```
 
 ## 11. Graph --- B-/C+
@@ -268,18 +945,26 @@ Nodes 是 `0,1,2,3,4`；数组中的 pair 才是 edges。
 
 Graph node 有任意多个 neighbors，不是 binary tree 的 left/right。
 
-### Adjacency List
+### Adjacency List 构建
 
 ``` go
+// Undirected graph
 graph := make([][]int, n)
 for _, edge := range edges {
     a, b := edge[0], edge[1]
     graph[a] = append(graph[a], b)
-    graph[b] = append(graph[b], a)
+    graph[b] = append(graph[b], a)  // 无向图双向
+}
+
+// Directed graph
+graph := make([][]int, n)
+for _, edge := range edges {
+    from, to := edge[0], edge[1]
+    graph[from] = append(graph[from], to)  // 有向图单向
 }
 ```
 
-### DFS
+### DFS 完整模板
 
 ``` go
 func dfs(graph [][]int, node int, visited []bool) {
@@ -291,180 +976,599 @@ func dfs(graph [][]int, node int, visited []bool) {
         dfs(graph, next, visited)
     }
 }
+
+// 调用
+visited := make([]bool, n)
+dfs(graph, startNode, visited)
 ```
 
-### BFS
+### BFS 完整模板
 
 ``` go
-visited[start] = true
-queue = append(queue, start)
+func bfs(graph [][]int, start int, n int) {
+    visited := make([]bool, n)
+    visited[start] = true           // mark when enqueued!
+    queue := []int{start}
 
-for len(queue) > 0 {
-    node := queue[0]
-    queue = queue[1:]
+    for len(queue) > 0 {
+        node := queue[0]
+        queue = queue[1:]
 
-    for _, next := range graph[node] {
-        if visited[next] {
-            continue
+        for _, next := range graph[node] {
+            if visited[next] {
+                continue
+            }
+            visited[next] = true    // mark when enqueued, NOT when dequeued
+            queue = append(queue, next)
         }
-        visited[next] = true
-        queue = append(queue, next)
     }
 }
 ```
 
-关键：**mark visited when enqueued, not when dequeued**。
+**关键：mark visited when enqueued, not when dequeued**。否则同一个节点会被多次入队。
+
+### BFS Shortest Path（带距离）
+
+``` go
+func shortestPath(graph [][]int, start, end, n int) int {
+    visited := make([]bool, n)
+    visited[start] = true
+    queue := []int{start}
+    dist := 0
+
+    for len(queue) > 0 {
+        levelSize := len(queue)
+        for i := 0; i < levelSize; i++ {
+            node := queue[0]
+            queue = queue[1:]
+            if node == end {
+                return dist
+            }
+            for _, next := range graph[node] {
+                if !visited[next] {
+                    visited[next] = true
+                    queue = append(queue, next)
+                }
+            }
+        }
+        dist++
+    }
+    return -1
+}
+```
 
 ### Connected Components
 
-``` text
-for each node:
-    if visited → continue
-    components++
-    BFS/DFS(node)
+``` go
+func countComponents(n int, edges [][]int) int {
+    graph := make([][]int, n)
+    for _, e := range edges {
+        graph[e[0]] = append(graph[e[0]], e[1])
+        graph[e[1]] = append(graph[e[1]], e[0])
+    }
+    visited := make([]bool, n)
+    count := 0
+    for i := 0; i < n; i++ {
+        if !visited[i] {
+            count++
+            dfs(graph, i, visited)
+        }
+    }
+    return count
+}
 ```
 
-### Grid BFS / Shortest Path
+### Grid DFS（Number of Islands）
+
+``` go
+func numIslands(grid [][]byte) int {
+    rows, cols := len(grid), len(grid[0])
+    count := 0
+    for i := 0; i < rows; i++ {
+        for j := 0; j < cols; j++ {
+            if grid[i][j] == '1' {
+                count++
+                gridDFS(grid, i, j, rows, cols)
+            }
+        }
+    }
+    return count
+}
+
+func gridDFS(grid [][]byte, i, j, rows, cols int) {
+    if i < 0 || i >= rows || j < 0 || j >= cols || grid[i][j] == '0' {
+        return
+    }
+    grid[i][j] = '0' // mark visited by modifying in-place
+    gridDFS(grid, i+1, j, rows, cols)
+    gridDFS(grid, i-1, j, rows, cols)
+    gridDFS(grid, i, j+1, rows, cols)
+    gridDFS(grid, i, j-1, rows, cols)
+}
+```
+
+### Grid BFS（Shortest Path）
 
 四方向：
 
-``` text
-[i-1][j]
-[i+1][j]
-[i][j-1]
-[i][j+1]
+``` go
+dirs := [4][2]int{{-1, 0}, {1, 0}, {0, -1}, {0, 1}}
+```
+
+``` go
+func gridBFS(grid [][]int, start, end [2]int) int {
+    rows, cols := len(grid), len(grid[0])
+    dirs := [4][2]int{{-1, 0}, {1, 0}, {0, -1}, {0, 1}}
+    visited := make([][]bool, rows)
+    for i := range visited {
+        visited[i] = make([]bool, cols)
+    }
+
+    visited[start[0]][start[1]] = true
+    queue := [][2]int{start}
+    steps := 0
+
+    for len(queue) > 0 {
+        levelSize := len(queue)
+        for i := 0; i < levelSize; i++ {
+            cell := queue[0]
+            queue = queue[1:]
+            if cell == end {
+                return steps
+            }
+            for _, d := range dirs {
+                nr, nc := cell[0]+d[0], cell[1]+d[1]
+                if nr >= 0 && nr < rows && nc >= 0 && nc < cols &&
+                    !visited[nr][nc] && grid[nr][nc] != 1 {
+                    visited[nr][nc] = true
+                    queue = append(queue, [2]int{nr, nc})
+                }
+            }
+        }
+        steps++
+    }
+    return -1
+}
 ```
 
 条件反射：
 
 > **Unweighted graph + minimum steps/hops → BFS.**
 
+### Cycle Detection（Directed Graph，3 states）
+
+``` go
+// 0=unvisited, 1=visiting, 2=visited
+func hasCycle(graph [][]int, node int, state []int) bool {
+    state[node] = 1  // visiting
+    for _, next := range graph[node] {
+        if state[next] == 1 { return true }  // back edge = cycle
+        if state[next] == 0 {
+            if hasCycle(graph, next, state) { return true }
+        }
+    }
+    state[node] = 2  // visited
+    return false
+}
+```
+
+### 关键词 → Graph Pattern
+
+``` text
+connected components / islands      → DFS/BFS + visited
+shortest path (unweighted)          → BFS
+shortest path (weighted)            → Dijkstra
+cycle detection (directed)          → DFS 3-state
+cycle detection (undirected)        → Union Find
+prerequisites / dependencies        → Topological Sort
+"is A connected to B" (dynamic)     → Union Find
+```
+
+### 常见错误
+
+``` text
+✗ BFS 在 dequeue 时才 mark visited → 导致重复入队，TLE
+✗ 无向图忘记双向添加边
+✗ Grid 越界检查遗漏
+✗ 混淆 node 和 edge
+```
+
 ## 12. Topological Sort --- C+/B-
 
-`indegree` = number of incoming edges。
+### 核心概念
 
-Dependency：
+`indegree` = number of incoming edges（有多少边指向这个 node）。
 
-``` text
-A depends on B
-→ B → A
-→ indegree[A]++
-```
-
-Kahn's Algorithm：
+Dependency 方向：
 
 ``` text
-1. Build adjacency list
-2. Calculate indegree
-3. Enqueue indegree == 0
-4. Pop node
-5. Decrease neighbors' indegree
-6. Neighbor becomes 0 → enqueue
+A depends on B → edge: B → A → indegree[A]++
+"要先完成 B 才能做 A"
 ```
+
+### Kahn's Algorithm（BFS）完整 Go 实现
+
+``` go
+func topologicalSort(n int, prerequisites [][]int) ([]int, bool) {
+    graph := make([][]int, n)
+    indegree := make([]int, n)
+
+    for _, p := range prerequisites {
+        // p = [course, prerequisite]
+        // prerequisite → course
+        course, prereq := p[0], p[1]
+        graph[prereq] = append(graph[prereq], course)
+        indegree[course]++
+    }
+
+    // 所有 indegree == 0 的入队
+    queue := []int{}
+    for i := 0; i < n; i++ {
+        if indegree[i] == 0 {
+            queue = append(queue, i)
+        }
+    }
+
+    order := []int{}
+    for len(queue) > 0 {
+        node := queue[0]
+        queue = queue[1:]
+        order = append(order, node)
+
+        for _, next := range graph[node] {
+            indegree[next]--              // decrement neighbor's indegree
+            if indegree[next] == 0 {
+                queue = append(queue, next)
+            }
+        }
+    }
+
+    if len(order) < n {
+        return nil, false  // cycle detected
+    }
+    return order, true
+}
+```
+
+### Course Schedule（能否修完所有课）
+
+``` go
+func canFinish(numCourses int, prerequisites [][]int) bool {
+    _, ok := topologicalSort(numCourses, prerequisites)
+    return ok
+}
+```
+
+### 关键词 → Topological Sort
 
 ``` text
-processed == numberOfNodes → no cycle
-processed < numberOfNodes → cycle
+prerequisites / dependencies    → Topo Sort
+build order / task scheduling   → Topo Sort
+detect cycle in directed graph  → Topo Sort (len(order) < n)
 ```
 
-当前主要错误：edge direction 和 decrement 对象容易写反。
+### 常见错误
+
+``` text
+✗ edge direction 写反：A depends on B，edge 应该是 B → A，不是 A → B
+✗ decrement 了错误 node 的 indegree：应该 decrement neighbor 的，不是当前 node 的
+✗ 忘记检测 cycle：len(order) < n 说明有 cycle
+```
 
 ## 13. Basic DP --- B
 
-House Robber：
+### DP 面试固定流程
 
 ``` text
-dp[i] = maximum money considering houses 0...i
-
-don't rob i → dp[i-1]
-rob i       → dp[i-2] + nums[i]
-
-dp[i] = max(dp[i-1], dp[i-2] + nums[i])
+1. Define state:  dp[i] 代表什么？
+2. Choices:       每一步有什么选择？
+3. Transition:    dp[i] 怎么从之前的状态得到？
+4. Base cases:    dp[0], dp[1] 等初始值
+5. Complexity:    Time & Space
+6. Optimization:  能否只用 O(1) 变量代替数组？
 ```
 
-Base：
+### 三种 DP 类型
 
-``` text
-dp[0] = nums[0]
-dp[1] = max(nums[0], nums[1])
+``` go
+// Counting（多少种方式？） → 加法
+dp[i] = dp[i-1] + dp[i-2]                       // Climbing Stairs
+
+// Optimization（最小/最大？） → min/max
+dp[i] = max(dp[i-1], dp[i-2] + nums[i])         // House Robber
+dp[i] = min(dp[i-coin] + 1, dp[i])              // Coin Change
+
+// Longest Sequence → max with condition
+dp[i] = max(dp[j]+1) for j < i where nums[j] < nums[i]  // LIS
 ```
 
-DP 面试固定流程：
+### House Robber 完整实现
+
+``` go
+func rob(nums []int) int {
+    n := len(nums)
+    if n == 1 { return nums[0] }
+
+    dp := make([]int, n)
+    dp[0] = nums[0]
+    dp[1] = max(nums[0], nums[1])
+
+    for i := 2; i < n; i++ {
+        dp[i] = max(dp[i-1], dp[i-2]+nums[i])
+    }
+    return dp[n-1]
+}
+
+// Space optimized O(1)
+func rob(nums []int) int {
+    prev2, prev1 := 0, 0
+    for _, num := range nums {
+        curr := max(prev1, prev2+num)
+        prev2 = prev1
+        prev1 = curr
+    }
+    return prev1
+}
+```
+
+### Coin Change 完整实现
+
+``` go
+func coinChange(coins []int, amount int) int {
+    dp := make([]int, amount+1)
+    for i := range dp {
+        dp[i] = amount + 1  // impossible value
+    }
+    dp[0] = 0
+
+    for i := 1; i <= amount; i++ {
+        for _, coin := range coins {
+            if coin <= i {
+                dp[i] = min(dp[i], dp[i-coin]+1)
+            }
+        }
+    }
+
+    if dp[amount] > amount { return -1 }
+    return dp[amount]
+}
+```
+
+### Longest Increasing Subsequence
+
+``` go
+func lengthOfLIS(nums []int) int {
+    n := len(nums)
+    dp := make([]int, n)
+    for i := range dp { dp[i] = 1 }
+    result := 1
+
+    for i := 1; i < n; i++ {
+        for j := 0; j < i; j++ {
+            if nums[j] < nums[i] {
+                dp[i] = max(dp[i], dp[j]+1)
+            }
+        }
+        result = max(result, dp[i])
+    }
+    return result
+}
+```
+
+### 2D DP：Unique Paths
+
+``` go
+func uniquePaths(m, n int) int {
+    dp := make([][]int, m)
+    for i := range dp {
+        dp[i] = make([]int, n)
+        dp[i][0] = 1
+    }
+    for j := 0; j < n; j++ { dp[0][j] = 1 }
+
+    for i := 1; i < m; i++ {
+        for j := 1; j < n; j++ {
+            dp[i][j] = dp[i-1][j] + dp[i][j-1]
+        }
+    }
+    return dp[m-1][n-1]
+}
+```
+
+### 关键词 → DP Pattern
 
 ``` text
-Define state
-→ choices
-→ transition
-→ base cases
-→ complexity
-→ space optimization
+how many ways              → counting DP (加法)
+minimum cost / maximum     → optimization DP (min/max)
+longest / shortest seq     → sequence DP
+can I reach / is possible  → boolean DP
+grid paths                 → 2D DP
 ```
 
 ## 14. 0/1 Knapsack --- B-/C+
 
+### 核心区别
+
 ``` text
-dp[w] = capacity w 下能获得的 maximum value
+0/1 Knapsack     → 每个 item 最多用一次 → 容量从大到小遍历
+Complete Knapsack → 每个 item 可以无限用 → 容量从小到大遍历
 ```
 
-Transition：
+**为什么 0/1 必须倒序？** 正序时 `dp[w-weight]` 可能已经在本轮被更新（包含了当前 item），导致同一个 item 被重复使用。
+
+### 0/1 Knapsack 完整实现
 
 ``` go
-dp[w] = max(dp[w], dp[w-weight]+value)
+func knapsack01(weights, values []int, capacity int) int {
+    dp := make([]int, capacity+1)
+
+    for i := 0; i < len(weights); i++ {
+        // 必须从大到小！
+        for w := capacity; w >= weights[i]; w-- {
+            dp[w] = max(dp[w], dp[w-weights[i]]+values[i])
+        }
+    }
+    return dp[capacity]
+}
 ```
 
-最重要：
+### Complete Knapsack 完整实现
+
+``` go
+func knapsackComplete(weights, values []int, capacity int) int {
+    dp := make([]int, capacity+1)
+
+    for i := 0; i < len(weights); i++ {
+        // 从小到大，允许重复使用
+        for w := weights[i]; w <= capacity; w++ {
+            dp[w] = max(dp[w], dp[w-weights[i]]+values[i])
+        }
+    }
+    return dp[capacity]
+}
+```
+
+### 常见变体
 
 ``` text
-0/1 Knapsack
-→ item only once
-→ capacity 大 → 小
-
-Complete Knapsack
-→ item unlimited
-→ capacity 小 → 大
+Subset Sum (能否凑出 target?)    → 0/1 Knapsack, dp[w] = bool
+Coin Change (最少硬币数)         → Complete Knapsack, dp[w] = min coins
+Coin Change II (组合数)          → Complete Knapsack, dp[w] += dp[w-coin]
+Partition Equal Subset Sum       → 0/1 Knapsack, target = sum/2
 ```
-
-0/1 必须倒序，否则同一个 item 会在本轮被重复使用。
 
 ## 15. Backtracking --- B-/C+
 
-统一 mental model：
+### 核心 Mental Model
 
 ``` text
-current state
-→ choices
-→ choose
-→ recursive explore
-→ unchoose
+current state → choices → choose → recurse → unchoose
 ```
 
-模板：
+核心 invariant：**进入一个 branch 前是什么状态，从 branch 返回后就恢复成什么状态。**
+
+### Subsets
 
 ``` go
-cur = append(cur, choice)
-dfs(...)
-cur = cur[:len(cur)-1]
+func subsets(nums []int) [][]int {
+    var result [][]int
+    var backtrack func(start int, path []int)
+    backtrack = func(start int, path []int) {
+        // 每个状态都是一个合法子集
+        result = append(result, append([]int{}, path...))
+
+        for i := start; i < len(nums); i++ {
+            path = append(path, nums[i])
+            backtrack(i+1, path)
+            path = path[:len(path)-1]  // unchoose
+        }
+    }
+    backtrack(0, []int{})
+    return result
+}
 ```
 
-核心 invariant：
+### Permutations
 
-> 进入一个 branch 前是什么状态，从 branch 返回后就恢复成什么状态。
+``` go
+func permute(nums []int) [][]int {
+    var result [][]int
+    used := make([]bool, len(nums))
+    var backtrack func(path []int)
+    backtrack = func(path []int) {
+        if len(path) == len(nums) {
+            result = append(result, append([]int{}, path...))
+            return
+        }
+        for i := 0; i < len(nums); i++ {
+            if used[i] { continue }
+            used[i] = true
+            path = append(path, nums[i])
+            backtrack(path)
+            path = path[:len(path)-1]
+            used[i] = false
+        }
+    }
+    backtrack([]int{})
+    return result
+}
+```
 
-Subsets 对每个 `nums[i]`：
+### Combination Sum（可重复使用元素）
+
+``` go
+func combinationSum(candidates []int, target int) [][]int {
+    var result [][]int
+    sort.Ints(candidates)
+    var backtrack func(start, remain int, path []int)
+    backtrack = func(start, remain int, path []int) {
+        if remain == 0 {
+            result = append(result, append([]int{}, path...))
+            return
+        }
+        for i := start; i < len(candidates); i++ {
+            if candidates[i] > remain { break }
+            path = append(path, candidates[i])
+            backtrack(i, remain-candidates[i], path)  // i not i+1, can reuse
+            path = path[:len(path)-1]
+        }
+    }
+    backtrack(0, target, []int{})
+    return result
+}
+```
+
+### Generate Parentheses（Constraint Pruning）
+
+``` go
+func generateParenthesis(n int) []string {
+    var result []string
+    var backtrack func(path []byte, open, close int)
+    backtrack = func(path []byte, open, close int) {
+        if len(path) == 2*n {
+            result = append(result, string(path))
+            return
+        }
+        if open < n {
+            backtrack(append(path, '('), open+1, close)
+        }
+        if close < open {
+            backtrack(append(path, ')'), open, close+1)
+        }
+    }
+    backtrack([]byte{}, 0, 0)
+    return result
+}
+```
+
+### 关键词 → Backtracking
 
 ``` text
-don't take
-take
+all subsets / combinations      → Subsets template (start index)
+all permutations / arrangements → Permutations template (used array)
+generate valid X                → constraint pruning
+word search / path finding      → grid backtracking
 ```
 
-保存 Go slice result 时需要 copy：
+### Go Slice 陷阱
+
+**保存结果时必须 copy**，否则后续修改会影响已保存的结果：
 
 ``` go
-result = append(result, append([]int{}, cur...))
+// ✗ 错误：直接 append path
+result = append(result, path)
+
+// ✓ 正确：copy 一份
+result = append(result, append([]int{}, path...))
 ```
 
-需要补：Generate Parentheses constraint pruning、Permutations、pattern
-recognition。
+### 常见错误
+
+``` text
+✗ Generate Parentheses 识别成 Stack 题 → 它是 backtracking + constraint pruning
+✗ 不理解为什么要 unchoose → 因为要回到 branch 前的状态，才能探索其他 branch
+✗ Subsets 用 i+1，Combination Sum (reuse) 用 i → 是否允许重复使用
+```
 
 ## 16. Greedy --- TBD，约 B-/C+
 
@@ -492,27 +1596,97 @@ Greedy 更准确的理解：
 
 ## 17. Union Find / DSU --- D
 
-目前没系统使用过。
-
-Mental model：
+### 核心操作
 
 ``` text
-find(x)
-→ x 属于哪个 connected component
-
-union(a,b)
-→ merge two components
+find(x)    → x 属于哪个 connected component（返回 root）
+union(a,b) → merge two components
 ```
 
-新增 `[a,b]`：
+### 完整 Go 实现（Path Compression + Union by Rank）
+
+``` go
+type UnionFind struct {
+    parent []int
+    rank   []int
+    count  int  // number of components
+}
+
+func NewUnionFind(n int) *UnionFind {
+    parent := make([]int, n)
+    rank := make([]int, n)
+    for i := range parent {
+        parent[i] = i
+    }
+    return &UnionFind{parent, rank, n}
+}
+
+func (uf *UnionFind) Find(x int) int {
+    if uf.parent[x] != x {
+        uf.parent[x] = uf.Find(uf.parent[x])  // path compression
+    }
+    return uf.parent[x]
+}
+
+func (uf *UnionFind) Union(x, y int) bool {
+    px, py := uf.Find(x), uf.Find(y)
+    if px == py { return false }  // already connected
+    // union by rank
+    if uf.rank[px] < uf.rank[py] {
+        px, py = py, px
+    }
+    uf.parent[py] = px
+    if uf.rank[px] == uf.rank[py] {
+        uf.rank[px]++
+    }
+    uf.count--
+    return true
+}
+
+func (uf *UnionFind) Connected(x, y int) bool {
+    return uf.Find(x) == uf.Find(y)
+}
+```
+
+### 使用示例：Redundant Connection
+
+``` go
+func findRedundantConnection(edges [][]int) []int {
+    n := len(edges)
+    uf := NewUnionFind(n + 1)
+    for _, e := range edges {
+        if !uf.Union(e[0], e[1]) {
+            return e  // already connected → this edge creates cycle
+        }
+    }
+    return nil
+}
+```
+
+### 关键词 → Union Find
 
 ``` text
-find(a) == find(b)
-→ already connected
-→ adding edge creates cycle
+dynamic connectivity / "are A and B connected"  → Union Find
+detect cycle in undirected graph                 → Union Find
+number of connected components (dynamic edges)   → Union Find
+accounts merge / friend circles                  → Union Find
 ```
 
-后续再学 path compression、union by rank/size。当前不是最高优先级。
+### Union Find vs DFS/BFS
+
+| | Union Find | DFS/BFS |
+|---|---|---|
+| 适用 | 动态加边，在线查询 | 静态图，一次性遍历 |
+| 优势 | merge + query 近似 O(1) | 完整路径/组件探索 |
+| 典型 | Redundant Connection | Number of Islands |
+
+### 复杂度
+
+``` text
+Find:  O(α(n)) ≈ O(1) amortized (with path compression + union by rank)
+Union: O(α(n)) ≈ O(1) amortized
+Space: O(n)
+```
 
 ## 18. Rate Limiter --- B
 
