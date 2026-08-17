@@ -1319,7 +1319,7 @@ func findCheapestPrice(n int, flights [][]int, src, dst, k int) int {
 }
 ```
 
-### Minimum Spanning Tree（MST）
+### Minimum Spanning Tree（MST）⚠️ 知道即可
 
 条件反射：**连接所有节点，总权重最小 → MST。**
 
