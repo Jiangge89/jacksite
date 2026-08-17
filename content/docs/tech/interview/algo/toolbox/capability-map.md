@@ -1139,12 +1139,12 @@ func gridBFS(grid [][]int, start, end [2]int) int {
 
 ``` go
 // 0=unvisited, 1=visiting, 2=visited
-func hasCycle(graph [][]int, node int, state []int) bool {
+func hasCycleDirected(graph [][]int, node int, state []int) bool {
     state[node] = 1  // visiting
     for _, next := range graph[node] {
         if state[next] == 1 { return true }  // back edge = cycle
         if state[next] == 0 {
-            if hasCycle(graph, next, state) { return true }
+            if hasCycleDirected(graph, next, state) { return true }
         }
     }
     state[node] = 2  // visited
@@ -1152,16 +1152,293 @@ func hasCycle(graph [][]int, node int, state []int) bool {
 }
 ```
 
+### Cycle Detection（Undirected Graph，DFS + parent）
+
+无向图不能用 3-state（因为 A→B 和 B→A 总是同时存在）。用 parent 区分"回边"和"来时的路"：
+
+``` go
+func hasCycleUndirected(graph [][]int, node, parent int, visited []bool) bool {
+    visited[node] = true
+    for _, next := range graph[node] {
+        if !visited[next] {
+            if hasCycleUndirected(graph, next, node, visited) {
+                return true
+            }
+        } else if next != parent {
+            return true  // visited 且不是 parent → cycle
+        }
+    }
+    return false
+}
+
+// 调用（检查所有 component）
+func containsCycle(n int, graph [][]int) bool {
+    visited := make([]bool, n)
+    for i := 0; i < n; i++ {
+        if !visited[i] {
+            if hasCycleUndirected(graph, i, -1, visited) {
+                return true
+            }
+        }
+    }
+    return false
+}
+```
+
+也可以用 **Union Find**：加边时如果两个 node 已经在同一个 component → cycle。
+
+### Dijkstra（Weighted Shortest Path）
+
+条件反射：**带正权重的图求最短路 → Dijkstra。**
+
+核心思想：贪心 + 优先队列。每次取出距离最小的未确定节点，用它更新邻居距离。
+
+``` go
+import "container/heap"
+
+type Edge struct {
+    to, weight int
+}
+
+type Item struct {
+    node, dist int
+}
+
+type PQ []Item
+func (h PQ) Len() int            { return len(h) }
+func (h PQ) Less(i, j int) bool  { return h[i].dist < h[j].dist }  // min heap by dist
+func (h PQ) Swap(i, j int)       { h[i], h[j] = h[j], h[i] }
+func (h *PQ) Push(x any)         { *h = append(*h, x.(Item)) }
+func (h *PQ) Pop() any {
+    old := *h
+    n := len(old)
+    x := old[n-1]
+    *h = old[:n-1]
+    return x
+}
+
+func dijkstra(n int, graph [][]Edge, src int) []int {
+    dist := make([]int, n)
+    for i := range dist {
+        dist[i] = math.MaxInt64
+    }
+    dist[src] = 0
+
+    pq := &PQ{{src, 0}}
+    heap.Init(pq)
+
+    for pq.Len() > 0 {
+        curr := heap.Pop(pq).(Item)
+        if curr.dist > dist[curr.node] {
+            continue  // 已经有更短的路径，跳过
+        }
+        for _, e := range graph[curr.node] {
+            newDist := dist[curr.node] + e.weight
+            if newDist < dist[e.to] {
+                dist[e.to] = newDist
+                heap.Push(pq, Item{e.to, newDist})
+            }
+        }
+    }
+    return dist
+}
+```
+
+### Dijkstra 使用示例：Network Delay Time
+
+``` go
+func networkDelayTime(times [][]int, n int, k int) int {
+    graph := make([][]Edge, n+1)
+    for _, t := range times {
+        from, to, w := t[0], t[1], t[2]
+        graph[from] = append(graph[from], Edge{to, w})
+    }
+
+    dist := dijkstra(n+1, graph, k)
+
+    maxDist := 0
+    for i := 1; i <= n; i++ {
+        if dist[i] == math.MaxInt64 {
+            return -1  // unreachable
+        }
+        maxDist = max(maxDist, dist[i])
+    }
+    return maxDist
+}
+```
+
+### Shortest Path 选择指南
+
+``` text
+Unweighted graph          → BFS                    O(V+E)
+Positive weights          → Dijkstra               O((V+E) log V)
+Negative weights (no neg cycle) → Bellman-Ford      O(V·E)
+All pairs                 → Floyd-Warshall          O(V³)
+DAG                       → Topological Sort + relax O(V+E)
+```
+
+### BFS/Dijkstra + Extra State
+
+有些最短路问题需要额外状态维度（如"最多经过 K 站"、"带钥匙状态"）：
+
+``` go
+// 示例：Cheapest Flights Within K Stops
+// state = (node, stops_used)
+type State struct {
+    node, cost, stops int
+}
+
+func findCheapestPrice(n int, flights [][]int, src, dst, k int) int {
+    graph := make([][]Edge, n)
+    for _, f := range flights {
+        graph[f[0]] = append(graph[f[0]], Edge{f[1], f[2]})
+    }
+
+    // dist[node] = min cost to reach node
+    dist := make([]int, n)
+    for i := range dist { dist[i] = math.MaxInt64 }
+    dist[src] = 0
+
+    // BFS by level (each level = one stop)
+    queue := []State{{src, 0, 0}}
+    for len(queue) > 0 {
+        curr := queue[0]
+        queue = queue[1:]
+        if curr.stops > k { continue }
+        for _, e := range graph[curr.node] {
+            newCost := curr.cost + e.weight
+            if newCost < dist[e.to] {
+                dist[e.to] = newCost
+                queue = append(queue, State{e.to, newCost, curr.stops + 1})
+            }
+        }
+    }
+
+    if dist[dst] == math.MaxInt64 { return -1 }
+    return dist[dst]
+}
+```
+
+### Minimum Spanning Tree（MST）
+
+条件反射：**连接所有节点，总权重最小 → MST。**
+
+### Kruskal（贪心 + Union Find）
+
+思路：把所有边按权重排序，从小到大加边，如果两端不在同一个 component 就合并。
+
+``` go
+func kruskal(n int, edges [][]int) int {
+    // edges[i] = [from, to, weight]
+    sort.Slice(edges, func(i, j int) bool {
+        return edges[i][2] < edges[j][2]
+    })
+
+    uf := NewUnionFind(n)
+    totalWeight := 0
+    edgesUsed := 0
+
+    for _, e := range edges {
+        if uf.Union(e[0], e[1]) {
+            totalWeight += e[2]
+            edgesUsed++
+            if edgesUsed == n-1 {
+                break  // MST 有 n-1 条边
+            }
+        }
+    }
+
+    if edgesUsed < n-1 {
+        return -1  // graph not connected
+    }
+    return totalWeight
+}
+```
+
+### Prim（贪心 + Priority Queue）
+
+思路：从任意节点开始，每次把当前 MST 集合能到达的最短边加进来。
+
+``` go
+func prim(n int, graph [][]Edge) int {
+    visited := make([]bool, n)
+    pq := &PQ{{0, 0}}  // start from node 0, cost 0
+    heap.Init(pq)
+    totalWeight := 0
+    nodesAdded := 0
+
+    for pq.Len() > 0 && nodesAdded < n {
+        curr := heap.Pop(pq).(Item)
+        if visited[curr.node] {
+            continue
+        }
+        visited[curr.node] = true
+        totalWeight += curr.dist
+        nodesAdded++
+
+        for _, e := range graph[curr.node] {
+            if !visited[e.to] {
+                heap.Push(pq, Item{e.to, e.weight})
+            }
+        }
+    }
+
+    if nodesAdded < n { return -1 }
+    return totalWeight
+}
+```
+
+### Kruskal vs Prim
+
+| | Kruskal | Prim |
+|---|---|---|
+| 思路 | 全局排序边，贪心加边 | 从一个点扩展，贪心加最近的边 |
+| 数据结构 | Union Find | Priority Queue |
+| 适合 | 边少（sparse graph） | 边多（dense graph） |
+| 复杂度 | O(E log E) | O((V+E) log V) |
+
+### Graph 问题分类总览
+
+``` text
+Graph Problems
+│
+├── 1. Traversal / Connectivity
+│      ├── DFS
+│      └── BFS
+│
+├── 2. Shortest Path
+│      ├── Unweighted → BFS
+│      ├── Positive weighted → Dijkstra
+│      └── With extra state → BFS/Dijkstra + State
+│
+├── 3. Dependency / Ordering
+│      └── Topological Sort (Kahn's BFS)
+│
+├── 4. Connected Components
+│      ├── DFS / BFS
+│      └── Union Find (DSU)
+│
+├── 5. Cycle Detection
+│      ├── Undirected → DFS + parent / Union Find
+│      └── Directed → DFS 3-state / Topological Sort
+│
+└── 6. Minimum Spanning Tree
+       ├── Kruskal (sort edges + Union Find)
+       └── Prim (priority queue expansion)
+```
+
 ### 关键词 → Graph Pattern
 
 ``` text
-connected components / islands      → DFS/BFS + visited
-shortest path (unweighted)          → BFS
-shortest path (weighted)            → Dijkstra
-cycle detection (directed)          → DFS 3-state
-cycle detection (undirected)        → Union Find
-prerequisites / dependencies        → Topological Sort
-"is A connected to B" (dynamic)     → Union Find
+connected components / islands         → DFS/BFS + visited
+shortest path (unweighted)             → BFS
+shortest path (positive weights)       → Dijkstra
+shortest path (with constraints)       → BFS/Dijkstra + extra state
+cycle detection (directed)             → DFS 3-state / Topo Sort
+cycle detection (undirected)           → DFS + parent / Union Find
+prerequisites / dependencies           → Topological Sort
+"is A connected to B" (dynamic)        → Union Find
+minimum cost to connect all nodes      → MST (Kruskal / Prim)
 ```
 
 ### 常见错误
@@ -1171,6 +1448,9 @@ prerequisites / dependencies        → Topological Sort
 ✗ 无向图忘记双向添加边
 ✗ Grid 越界检查遗漏
 ✗ 混淆 node 和 edge
+✗ Dijkstra 用于负权图 → 不适用，需要 Bellman-Ford
+✗ Undirected cycle 用 3-state → 无法区分回边和来时的路，需要 parent 参数
+✗ MST 忘记检查 graph 是否 connected
 ```
 
 ## 12. Topological Sort --- C+/B-
