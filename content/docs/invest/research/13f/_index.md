@@ -3,6 +3,7 @@ date: 2026-07-07T20:00:00+08:00
 tags: ["13F", "机构持仓", "Coatue", "Tiger Global", "ARK"]
 title: "13F 机构跟踪"
 weight: 7
+bookCollapseSection: true
 ---
 
 ## 为什么跟踪
